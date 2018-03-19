@@ -5,31 +5,30 @@
     </a>
   </h1>
   <nav id="navigation">
-      <a href="#">
+      <a [routerLink]="['/tasks']" [routerLinkActive]="['active']">
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
           Tareas
         </a>
   </nav>
   <nav id="user_logged" >
-      <div class="user_image" >
-          <img id="image-logged" style="width: 100px;" src="{{url + 'get-image-user/' + identity.image}}"/>
+      <div class="user-image" >
+          <img id="image-logged"  src="{{url + 'get-image-user/' + identity.image}}"/>
       </div>
       <span id="identity_name">
         {{identity.name}}
-      </span>
-      
-      <a (click)="logout()">
-        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
-        Cerrar sesión
-      </a>
-      <a [routerLink]="['/mis-datos']">
+      </span> 
+      <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         Mis datos
+      </a>
+      <a  (click)="logout()" class="btn-logout">
+        <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+        Salir
       </a>
     </nav>
 </div>
 
-<div *ngIf="identity" class="central col-lg-11">
+<div [class.hidden]="!identity" class="central col-lg-11">
   <router-outlet></router-outlet>
 </div>
 

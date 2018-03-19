@@ -5,12 +5,13 @@ import { HttpModule } from '@angular/http';
 import {routing,appRoutingProviders} from './app.routing';
 import { AppComponent } from './app.component';
 import {UserEditComponent} from './components/user-edit.component';
-
+import {TaskListComponent} from './components/task-list-component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserEditComponent
+    UserEditComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,
