@@ -2,6 +2,7 @@ import { Component,OnInit } from '@angular/core';
 import { User } from './models/user';
 import { UserService } from './services/user.service';
 import {GLOBAL} from './services/global';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,8 +17,13 @@ export class AppComponent implements OnInit{
   //public token;
   public errorMessage;
   public url;
+
+
+
   constructor(
-    private _userService:UserService
+    private _userService:UserService,
+    private _route:ActivatedRoute,
+    private _router:Router
   ){
     this.user=new User('','','','','','');
     this.user_register=new User('','','','','','');
@@ -60,6 +66,7 @@ export class AppComponent implements OnInit{
     localStorage.removeItem('identity');
     localStorage.clear();
     this.identity=null;
+    this._router.navigate(['/']);
   }
   onSubmitRegister(){
     this._userService.register(this.user_register).subscribe(

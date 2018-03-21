@@ -5,12 +5,19 @@ import {Routes,RouterModule} from '@angular/router';
 import {UserEditComponent} from './components/user-edit.component'
 
 //Import Tareas
-import {TaskListComponent} from './components/task-list-component';
+import {TaskListComponent} from './components/task-list.component';
+import {TaskAddComponent} from './components/task-add.component';
+import {TaskEditComponent} from './components/task-edit.component';
+//Import Home
+import {HomeComponent} from './components/home.component';
 const appRoutes:Routes=[
-    {path:'',component:TaskListComponent},
+    {path:'home',component:HomeComponent},
     {path:'mis-datos',component:UserEditComponent},
     {path:'tasks',component:TaskListComponent},
-    {path:'**',component:TaskListComponent},
+    {path:'add-task/:user',component:TaskAddComponent},
+    {path:'update-task/:id',component:TaskEditComponent},
+    {path:'delete-task/:id',component:TaskEditComponent},
+    {path:'**',component:HomeComponent},
 
 ];
 

@@ -61,6 +61,13 @@ html,body{
 .btn-logout{
     cursor: pointer;
 }
-
+#tasks{
+    margin-top: 10px;
+    border-radius: 9px;
+    padding: 4px 17px;
+    font-weight: bold;
+    cursor: pointer;
+   
+}
 
 

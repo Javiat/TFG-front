@@ -1,0 +1,34 @@
+<div class="col-lg-6">
+    <h1>{{titulo}}</h1>
+    <div *ngIf="alertMessage">
+        <div class="alert alert-info">
+             {{alertMessage}}
+        </div>
+    </div>
+<form #formTask="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+        <label>Título:</label>
+        <input type="text" #title="ngModel" name="title" [(ngModel)]="task.title" class="form-control" required/>
+      </p>
+      <p>
+          <label>Descripción:</label>
+          <input type="text" #description="ngModel" name="description" [(ngModel)]="task.description" class="form-control" required/>
+      </p>
+      <p>
+        <label>Fecha de inicio:</label>
+        <input #fechainicio="ngModel" name="fechainicio" [(ngModel)]="task.fecha_inicio" type="datetime" class="form-control" required/>
+      </p>
+      <p>
+        <label>Fecha de fin:</label>
+        <input #fechafin="ngModel" name="fechafin" [(ngModel)]="task.fecha_fin" type="datetime" class="form-control" required/>
+      </p>
+      <p>
+          <label>Tipo:</label>
+          <input type="text" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required/>
+      </p>
+      <p>
+            <input type="submit" class="btn btn-success" value="Crear" [disabled]="!formTask.form.valid" />
+        </p>
+</form>
+</div>
+

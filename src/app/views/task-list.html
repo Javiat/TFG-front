@@ -1,3 +1,36 @@
 <div *ngIf="identity" class="head-page">
-    <h1>{{title}}</h1>
+    
+    <div class="col-lg-4">
+        <div class="row">
+            <h1>{{title}}</h1>
+            <a [routerLink]="['/add-task',id]" class="btn btn-default">
+               Añadir Tarea
+            </a>
+        </div>
+        <div id="list-tasks" *ngIf="tasks">
+            <div class="row">
+                    <div  *ngFor="let task of tasks" [routerLink]="['/update-task/',task._id]"  style="max-width: 18rem;">
+                        <div id="tasks" *ngIf="task.type=='solida'" class="card text-white bg-danger mb-3">
+                                <div  class="card-header">{{task.title}}</div>
+                                <div class="card-body">
+                                <p class="card-text">Inicio:{{task.fecha_inicio}}</p>
+                                <p class="card-text">Fin:{{task.fecha_fin}}</p>
+                                </div>
+                        </div>
+                        <div id="tasks" *ngIf="task.type=='liquida'" class="card text-white bg-info mb-3">
+                                <div  class="card-header">{{task.title}}</div>
+                                <div class="card-body">
+                                <p class="card-text">Inicio:{{task.fecha_inicio}}</p>
+                                <p class="card-text">Fin:{{task.fecha_fin}}</p>
+                                </div>
+                        </div>      
+                      </div>
+            </div>
+                 
+        </div>
+    </div>
+    <div  class="col-lg-10">
+        
+    </div>
+    
 </div>
