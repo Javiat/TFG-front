@@ -3,6 +3,10 @@ import { User } from './models/user';
 import { UserService } from './services/user.service';
 import {GLOBAL} from './services/global';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+
+declare var jQuery:any;
+declare var $:any;
+declare var fullcalendar:any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
