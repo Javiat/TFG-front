@@ -33,7 +33,7 @@ export class TaskEditComponent implements OnInit{
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.is_edit=true;
-        this.task=new Task('','','','','','','','');
+        this.task=new Task('','','',null,null,'','','');
     }
 
     ngOnInit(){

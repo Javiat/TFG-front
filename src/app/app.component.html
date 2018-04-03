@@ -1,4 +1,4 @@
-<div *ngIf="identity" class="navigation col-lg-1">
+<div *ngIf="identity" class="navigation col-md-2">
   <h1 class="head-title">
     <a [routerLink]="['/']">
       {{title}}
@@ -28,7 +28,7 @@
     </nav>
 </div>
 
-<div [class.hidden]="!identity" class="central col-lg-11">
+<div [class.hidden]="!identity" class="central col-md-10">
   <router-outlet></router-outlet>
 </div>
 

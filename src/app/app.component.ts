@@ -6,7 +6,7 @@ import {Router, ActivatedRoute, Params} from '@angular/router';
 
 declare var jQuery:any;
 declare var $:any;
-declare var fullcalendar:any;
+declare var fn:any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -16,6 +16,7 @@ const appRoutes:Routes=[
     {path:'tasks',component:TaskListComponent},
     {path:'add-task/:user',component:TaskAddComponent},
     {path:'update-task/:id',component:TaskEditComponent},
+    {path:'update-event/:id',component:TaskListComponent},
     {path:'delete-task/:id',component:TaskEditComponent},
     {path:'**',component:HomeComponent},
 

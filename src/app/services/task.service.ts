@@ -1,6 +1,7 @@
 import {Injectable } from '@angular/core';
 import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/of';
 import {Observable} from 'rxjs/Observable';
 import { GLOBAL } from './global';
 import { Task } from '../models/task';
@@ -27,7 +28,7 @@ export class TaskService{
        let headers=new Headers({
             'Content-Type':'application/json'
        });
-       let options=new RequestOptions({headers:headers}); 
+       let options=new RequestOptions({headers:headers});
        return this._http.get(this.url+'get-tasks/'+userId,options)
                             .map(res=>res.json());
    }
@@ -49,6 +50,17 @@ export class TaskService{
     return this._http.put(this.url+'update-task/'+id,params,{headers:headers})
                         .map(res=>res.json());
     }
+
+    updateEvent(id:string,model:any){
+        let params=JSON.stringify(model);
+        let headers=new Headers({
+            'Content-Type':'application/json'
+        });
+        return this._http.put(this.url+'update-event/'+id,params,{headers:headers})
+                            .map(res=>res.json());
+        }
+
+
     deleteTask(id:string){
         let headers=new Headers({
             'Content-Type':'application/json'

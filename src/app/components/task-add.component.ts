@@ -28,7 +28,7 @@ export class TaskAddComponent implements OnInit{
     ){
         this.titulo='Crear una nueva tarea';
         this.identity=this._userService.getIdentity();
-        this.task=new Task('','','','','','','','');
+        this.task=new Task('','','',null,null,'','','');
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
     }

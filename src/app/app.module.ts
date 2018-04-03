@@ -9,7 +9,7 @@ import {TaskListComponent} from './components/task-list.component';
 import {HomeComponent} from './components/home.component';
 import {TaskAddComponent} from './components/task-add.component';
 import {TaskEditComponent} from './components/task-edit.component';
-
+import { FullCalendarModule } from 'ng-fullcalendar';
 
 @NgModule({
   declarations: [
@@ -18,14 +18,16 @@ import {TaskEditComponent} from './components/task-edit.component';
     TaskListComponent,
     HomeComponent,
     TaskAddComponent,
-    TaskEditComponent,
+    TaskEditComponent
+   
 
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    FullCalendarModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

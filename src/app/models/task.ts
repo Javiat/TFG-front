@@ -4,8 +4,8 @@ export class Task{
         public _id:string,
         public title:string,
         public description:string,
-        public fecha_inicio:string,
-        public fecha_fin:string,
+        public start:Date,
+        public end:Date,
         public duration:string,
         public type:string,
         public user:string

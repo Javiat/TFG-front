@@ -1,6 +1,5 @@
 <div *ngIf="identity" class="head-page">
-    
-    <div class="col-lg-4">
+    <div class="col-md-2">
         <div class="row">
             <h1>{{title}}</h1>
             <a [routerLink]="['/add-task',id]" class="btn btn-default">
@@ -13,15 +12,15 @@
                         <div id="tasks" *ngIf="task.type=='solida'" class="card text-white bg-danger mb-3">
                                 <div  class="card-header">{{task.title}}</div>
                                 <div class="card-body">
-                                <p class="card-text">Inicio:{{task.fecha_inicio}}</p>
-                                <p class="card-text">Fin:{{task.fecha_fin}}</p>
+                                <p class="card-text">Inicio:{{task.start}}</p>
+                                <p class="card-text">Fin:{{task.end}}</p>
                                 </div>
                         </div>
                         <div id="tasks" *ngIf="task.type=='liquida'" class="card text-white bg-info mb-3">
                                 <div  class="card-header">{{task.title}}</div>
                                 <div class="card-body">
-                                <p class="card-text">Inicio:{{task.fecha_inicio}}</p>
-                                <p class="card-text">Fin:{{task.fecha_fin}}</p>
+                                <p class="card-text">Inicio:{{task.start}}</p>
+                                <p class="card-text">Fin:{{task.end}}</p>
                                 </div>
                         </div>      
                       </div>
@@ -29,8 +28,12 @@
                  
         </div>
     </div>
-    <div  class="col-lg-10">
-        
+    <div  class="col-md-10">
+        <a (click)="loadevents()"> loadevents</a>
+        <p>Display event : {{displayEvent | json}}</p>
+        <div *ngIf="calendarOptions">
+            <ng-fullcalendar #ucCalendar  [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+                (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+        </div>
     </div>
-    
 </div>

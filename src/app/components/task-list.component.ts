@@ -1,17 +1,18 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-
+import { EventService } from '../services/event.service';
 
 import {GLOBAL} from '../services/global';
 import {UserService} from '../services/user.service';
 import {Task} from '../models/task';
 import {User} from '../models/user';
 import {TaskService} from '../services/task.service';
-
+import { CalendarComponent } from 'ng-fullcalendar';
+import { Options } from 'fullcalendar';
 @Component({
     selector:'task-list',
     templateUrl:'../views/task-list.html',
-    providers:[UserService,TaskService]
+    providers:[UserService,TaskService,EventService]
 })
 
 export class TaskListComponent implements OnInit{
@@ -23,11 +24,16 @@ export class TaskListComponent implements OnInit{
     public user:User;
     public alertMessage;
     public type;
+    calendarOptions: Options;
+    displayEvent: any;
+    events = null;
+    @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _route:ActivatedRoute,
         private _router:Router,
         private _userService:UserService,
-        private _taskService:TaskService
+        private _taskService:TaskService,
+        private eventService:EventService
 
     ){
         this.title='Tareas';
@@ -40,6 +46,16 @@ export class TaskListComponent implements OnInit{
     ngOnInit(){
         console.log('task-list.component.ts cargado');
         //Conseguir el listado de tareas
+        this.calendarOptions = {
+          editable: true,
+          eventLimit: false,
+          header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listMonth'
+          },
+          events:[]
+        }; 
         this._taskService.getTasks(this.id).subscribe(
             response=>{
                 if(!response.tasks){
@@ -47,6 +63,15 @@ export class TaskListComponent implements OnInit{
                    
                 }else{
                     this.tasks=response.tasks;
+                    this.events=[this.tasks.length];
+                    for(var i=0;i<this.tasks.length;i++){
+                      this.events[i]={
+                        id:this.tasks[i]._id,
+                        title: this.tasks[i].title,
+                        start:this.tasks[i].start,
+                        end: this.tasks[i].end
+                      }
+                    }
                 }
             },
             error=>{
@@ -58,6 +83,86 @@ export class TaskListComponent implements OnInit{
             }
         )
         
+     
+        
     }
+    // loadevents() {
+    //   this.events=[this.tasks.length];
+    //   console.log(this.events);
+    //   for(var i=0;i<this.tasks.length;i++){
+    //     this.events[i]={
+    //       id:this.tasks[i]._id,
+    //       title: this.tasks[i].title,
+    //       start:this.tasks[i].fecha_inicio,
+    //       end: this.tasks[i].fecha_fin,
+    //       type:this.tasks[i].type,
+    //       duration:this.tasks[i].duration
+    //     }
+    //   }
+          
+      //   console.log(this.events);
+      // this.eventService.getEvents().subscribe(data => {
+      //   this.events = data;
+      // });
+      //   console.log(this.events);
+      // }
+
+      clickButton(model: Task) {
+        this.displayEvent = model;
+      }
+      dayClick(model: Task) {
+        console.log(model);
+      }
+      eventClick(model: any) {
+        model = {
+          event: {
+            id: model.event.id,
+            start: model.event.start,
+            end: model.event.end,
+            title: model.event.title,
+            type:model.event.type,
+            duration:model.event.duration
+            // other params
+          },
+         
+        }
+        
+        this.displayEvent = model;
+      }
+      updateEvent(model: any) {
+        model = {
+          event: {
+            id: model.event.id,
+            start: model.event.start,
+            end: model.event.end,
+            title: model.event.title
+            // other params
+          },
+          duration: {
+            _data: model.duration._data
+          }
+        }
+        console.log(model.event);
+        this._taskService.updateEvent(model.event.id,model.event).subscribe(
+          response=>{
+              if(!response.task){
+                  this.alertMessage='Error en el servidor';
+              }else{
+                  this.alertMessage='La tarea se ha actualizado correctamente';
+                  this._router.navigate(['/tasks']);
+              }
+          },
+          error=>{
+              var errorMessage=<any>error;
+              if(errorMessage!=null){
+                var body=JSON.parse(error._body);
+                this.alertMessage=body.message;
+              }
+          }
+
+      );
+        this.displayEvent = model;
+        
+       }
     
 }
