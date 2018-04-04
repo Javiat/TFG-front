@@ -61,7 +61,8 @@ export class EventService {
             title: 'Click for Google',
             url: 'http://google.com/',
             start: yearMonth + '-28'
-        }];
+        },
+    ];
         return Observable.of(data);
     }
 };

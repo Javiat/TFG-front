@@ -56,35 +56,37 @@ export class TaskListComponent implements OnInit{
           },
           events:[]
         }; 
-        this._taskService.getTasks(this.id).subscribe(
-            response=>{
-                if(!response.tasks){
-                    this.alertMessage='Este usuario no tiene tareas';
-                   
-                }else{
-                    this.tasks=response.tasks;
-                    this.events=[this.tasks.length];
-                    for(var i=0;i<this.tasks.length;i++){
-                      this.events[i]={
-                        id:this.tasks[i]._id,
-                        title: this.tasks[i].title,
-                        start:this.tasks[i].start,
-                        end: this.tasks[i].end
-                      }
-                    }
-                }
-            },
-            error=>{
-                var errorMessage=<any>error;
-                if(errorMessage!=null){
-                  var body=JSON.parse(error._body);
-                  this.alertMessage=body.message;
+       this.getTasks();
+    }
+
+    getTasks(){
+      this._taskService.getTasks(this.id).subscribe(
+        response=>{
+            if(!response.tasks){
+                this.alertMessage='Este usuario no tiene tareas';
+               
+            }else{
+                this.tasks=response.tasks;
+                this.events=[this.tasks.length];
+                for(var i=0;i<this.tasks.length;i++){
+                  this.events[i]={
+                    id:this.tasks[i]._id,
+                    title: this.tasks[i].title,
+                    start:this.tasks[i].start,
+                    end: this.tasks[i].end,
+                    type:this.tasks[i].type
+                  }
                 }
             }
-        )
-        
-     
-        
+        },
+        error=>{
+            var errorMessage=<any>error;
+            if(errorMessage!=null){
+              var body=JSON.parse(error._body);
+              this.alertMessage=body.message;
+            }
+        }
+    )  
     }
     // loadevents() {
     //   this.events=[this.tasks.length];
@@ -124,9 +126,7 @@ export class TaskListComponent implements OnInit{
             duration:model.event.duration
             // other params
           },
-         
         }
-        
         this.displayEvent = model;
       }
       updateEvent(model: any) {
@@ -135,21 +135,23 @@ export class TaskListComponent implements OnInit{
             id: model.event.id,
             start: model.event.start,
             end: model.event.end,
-            title: model.event.title
+            title: model.event.title,
+            type:model.event.type
             // other params
           },
           duration: {
             _data: model.duration._data
           }
+          
         }
-        console.log(model.event);
+
         this._taskService.updateEvent(model.event.id,model.event).subscribe(
           response=>{
               if(!response.task){
                   this.alertMessage='Error en el servidor';
               }else{
-                  this.alertMessage='La tarea se ha actualizado correctamente';
-                  this._router.navigate(['/tasks']);
+                  console.log('La tarea se ha actualizado correctamente');
+                  this.getTasks();
               }
           },
           error=>{
@@ -161,7 +163,7 @@ export class TaskListComponent implements OnInit{
           }
 
       );
-        this.displayEvent = model;
+        this.displayEvent = model.event;
         
        }
     
