@@ -74,9 +74,15 @@ export class TaskListComponent implements OnInit{
                     title: this.tasks[i].title,
                     start:this.tasks[i].start,
                     end: this.tasks[i].end,
-                    type:this.tasks[i].type
+                    type:this.tasks[i].type,
+                  }
+                  if(this.events[i].type=='liquida'){
+                    this.events[i].color='#4D7FC2'
+                  }else{
+                    this.events[i].color='#C23E3D'
                   }
                 }
+                
             }
         },
         error=>{
@@ -88,27 +94,37 @@ export class TaskListComponent implements OnInit{
         }
     )  
     }
-    // loadevents() {
-    //   this.events=[this.tasks.length];
-    //   console.log(this.events);
-    //   for(var i=0;i<this.tasks.length;i++){
-    //     this.events[i]={
-    //       id:this.tasks[i]._id,
-    //       title: this.tasks[i].title,
-    //       start:this.tasks[i].fecha_inicio,
-    //       end: this.tasks[i].fecha_fin,
-    //       type:this.tasks[i].type,
-    //       duration:this.tasks[i].duration
-    //     }
-    //   }
+    //  loadevents() {
+    // //   this.events=[this.tasks.length];
+    // //   console.log(this.events);
+    // //   for(var i=0;i<this.tasks.length;i++){
+    // //     this.events[i]={
+    // //       id:this.tasks[i]._id,
+    // //       title: this.tasks[i].title,
+    // //       start:this.tasks[i].fecha_inicio,
+    // //       end: this.tasks[i].fecha_fin,
+    // //       type:this.tasks[i].type,
+    // //       duration:this.tasks[i].duration
+    // //     }
+    // //   }
           
-      //   console.log(this.events);
-      // this.eventService.getEvents().subscribe(data => {
-      //   this.events = data;
-      // });
-      //   console.log(this.events);
-      // }
-
+    //   //   console.log(this.events);
+    //   this.events= [
+    //     {
+    //         start: '2018-04-04',
+    //         end: '2018-04-04',
+    //         overlap: false,
+    //         rendering: 'background',
+    //         color: '#257e4a'
+    //     },
+    //     {
+    //        start: '2018-04-05',
+    //          end: '2018-04-05',
+    //         overlap: false,
+    //         rendering: 'background',
+    //         color: '#ff9f89'
+    //     }]
+    //   }
       clickButton(model: Task) {
         this.displayEvent = model;
       }

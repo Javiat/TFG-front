@@ -70,5 +70,11 @@ html,body{
     font-weight: bold;
     cursor: pointer;
 }
-
-
+.bg-danger {
+    background-color: #C23E3D;
+    
+}
+.bg-info {
+    background-color: #4D7FC2;
+    
+}
