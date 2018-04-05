@@ -14,14 +14,14 @@
               <label>Descripción:</label>
               <input type="text" #description="ngModel" name="description" [(ngModel)]="task.description" class="form-control" required/>
           </p>
-          <p>
+          <!-- <p>
             <label>Fecha de inicio:</label>
-            <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime" class="form-control" required/>
+            <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local" class="form-control" required/>
           </p>
           <p>
             <label>Fecha de fin:</label>
-            <input #end="ngModel" name="end" [(ngModel)]="task.end" type="datetime" class="form-control" required/>
-          </p>
+            <input #end="ngModel" name="end" [(ngModel)]="task.end" type="datetime-local" class="form-control" required/>
+          </p> -->
           <p>
               <label>Tipo:</label>
               <input type="text" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required/>

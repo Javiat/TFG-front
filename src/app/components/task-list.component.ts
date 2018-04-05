@@ -157,8 +157,7 @@ export class TaskListComponent implements OnInit{
           },
           duration: {
             _data: model.duration._data
-          }
-          
+          }  
         }
 
         this._taskService.updateEvent(model.event.id,model.event).subscribe(
@@ -179,8 +178,7 @@ export class TaskListComponent implements OnInit{
           }
 
       );
-        this.displayEvent = model.event;
-        
+        this.displayEvent = model; 
        }
     
 }
