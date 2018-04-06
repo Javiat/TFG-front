@@ -4,7 +4,8 @@
 html,body{
     margin:0px;
     height: 100%;
-    background:#eee;
+    background:#F3F6FF;
+    font-family: 'Nunito', sans-serif;
 }
 .active{
     border-bottom: 4px solid #84bd00;
@@ -24,7 +25,7 @@ html,body{
     height: 100%;
 }
 .navigation a{
-    color: #ddd;
+    color: #F3F6FF;
     margin-top: 20px;
     margin-bottom: 20px;
     display: block;
@@ -47,7 +48,7 @@ html,body{
     width: 75%;
 }
 #user_logged .user-image{
-    background: #eee;
+    background: #F3F6FF;
     border-radius: 100px;
     height: 57px;
     width: 57px;
@@ -77,4 +78,28 @@ html,body{
 .bg-info {
     background-color: #4D7FC2;
     
+}
+.btn-green{
+    width: 100%;
+    background-color: #84bd00;
+    color: #F3F6FF;
+    font-weight: bold;
+}
+.btn-green:hover{
+    width: 100%;
+    background-color: #84bd00;
+    color: #F3F6FF;
+    font-weight: bold;
+}
+.btn-red{
+    width: 100%;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+#logo{
+    font-size: 60px;
+}
+.jumbotron{
+    background:#F3F6FF;
 }
