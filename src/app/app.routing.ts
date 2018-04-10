@@ -10,7 +10,7 @@ import {TaskAddComponent} from './components/task-add.component';
 import {TaskEditComponent} from './components/task-edit.component';
 //Import Home
 import {HomeComponent} from './components/home.component';
-import {RegisterComponent} from './components/register.component';
+
 const appRoutes:Routes=[
     {path:'home',component:HomeComponent},
     {path:'mis-datos',component:UserEditComponent},
@@ -19,7 +19,6 @@ const appRoutes:Routes=[
     {path:'update-task/:id',component:TaskEditComponent},
     {path:'update-event/:id',component:TaskListComponent},
     {path:'delete-task/:id',component:TaskEditComponent},
-    {path:'register',component:RegisterComponent},
     {path:'**',component:HomeComponent},
 
 ];

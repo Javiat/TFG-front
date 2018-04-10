@@ -1,8 +1,6 @@
-<div *ngIf="identity" class="navigation col-md-1">
+<div *ngIf="identity" class="navigation col-md-1" >
   <h1 class="head-title">
-    <a [routerLink]="['/']">
-      {{title}}
-    </a>
+    <a [routerLink]="['/']"> <i class="far  fa-calendar-alt "></i>  CALENDAR </a>
   </h1>
   <nav id="navigation">
       <a [routerLink]="['/tasks']" [routerLinkActive]="['active']">
@@ -35,12 +33,13 @@
 <div *ngIf="!identity" id="principal" class="row">
   <div class="col-lg-12" style="text-align:center;">
       <H1 id="logo"><i class="far  fa-calendar-alt "></i>  CALENDAR</H1>
+      <button class="btn btn-index" id="prueba2">Login</button>
+      <button class="btn btn-index" id="prueba">Registro</button>        
   </div>
   <div class="col-md-5"></div>
   <div class="col-md-4">
-    <form class="col-md-6" (ngSubmit)="onSubmit()" #loginform="ngForm">
+    <form class="col-md-6" id="login" (ngSubmit)="onSubmit()" #loginform="ngForm">
         <h1>Identificate</h1>
-        <p>O <a href="">crea una cuenta</a></p>
         <div *ngIf="errorMessage">
             <div class="alert alert-info">
                 <strong>Error!</strong> {{errorMessage}}
@@ -63,7 +62,10 @@
     </form>
   </div>
   <div class="col-md-2"></div>
-  <div class="col-md-12" class="hide"> 
+
+  
+  <div class="col-md-5"></div>
+  <div class="col-md-4" style="display: none" id="formulario_registro"> 
     <form class="col-md-6" #registerForm="ngForm" (ngSubmit)="onSubmitRegister()">
       <h1>Registrate</h1>
       <div *ngIf="alertRegister">
@@ -92,7 +94,7 @@
           </p>
       </form>
   </div>
- 
+  <div class="col-md-2"></div>
 </div>
 
 

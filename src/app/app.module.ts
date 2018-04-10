@@ -9,7 +9,7 @@ import {TaskListComponent} from './components/task-list.component';
 import {HomeComponent} from './components/home.component';
 import {TaskAddComponent} from './components/task-add.component';
 import {TaskEditComponent} from './components/task-edit.component';
-import {RegisterComponent} from './components/register.component';
+
 import { FullCalendarModule } from 'ng-fullcalendar';
 
 @NgModule({
@@ -19,8 +19,8 @@ import { FullCalendarModule } from 'ng-fullcalendar';
     TaskListComponent,
     HomeComponent,
     TaskAddComponent,
-    TaskEditComponent,
-   RegisterComponent
+    TaskEditComponent
+
 
   ],
   imports: [

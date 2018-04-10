@@ -36,7 +36,7 @@ export class TaskListComponent implements OnInit{
         private eventService:EventService
 
     ){
-        this.title='Tareas';
+        this.title='Listado de tareas';
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
@@ -77,7 +77,7 @@ export class TaskListComponent implements OnInit{
                     type:this.tasks[i].type,
                   }
                   if(this.events[i].type=='liquida'){
-                    this.events[i].color='#4D7FC2'
+                    this.events[i].color='#53B4BD'
                   }else{
                     this.events[i].color='#C23E3D'
                   }

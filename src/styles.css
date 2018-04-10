@@ -8,7 +8,7 @@ html,body{
     font-family: 'Nunito', sans-serif;
 }
 .active{
-    border-bottom: 4px solid #84bd00;
+    border-bottom: 4px solid #9ABE05;
     padding-bottom: 4px;
 }
 .head-title{
@@ -68,26 +68,26 @@ html,body{
     margin-top: 10px;
     border-radius: 9px;
     padding: 4px 17px;
-    font-weight: bold;
+    
     cursor: pointer;
 }
 .bg-danger {
-    background-color: #C23E3D;
-    
+    background-color: #C23F3E;
+    color:#F3F6FF;
 }
 .bg-info {
-    background-color: #4D7FC2;
-    
+    background-color: #53B4BD;
+    color:#F3F6FF;
 }
 .btn-green{
     width: 100%;
-    background-color: #84bd00;
+    background-color: #9ABE05;
     color: #F3F6FF;
     font-weight: bold;
 }
 .btn-green:hover{
     width: 100%;
-    background-color: #84bd00;
+    background-color: #9ABE05;
     color: #F3F6FF;
     font-weight: bold;
 }
@@ -97,9 +97,41 @@ html,body{
     color: white;
     font-weight: bold;
 }
+.btn-red:hover{
+    width: 100%;
+    background-color: #C23F3E;
+    color: #F3F6FF;
+    font-weight: bold;
+}
+.btn-index{
+    background-color: #477EBD;
+    color: #F3F6FF;
+    font-weight: bold;
+}
+.btn-index:hover{
+    background-color: #477EBD;
+    color: #F3F6FF;
+    font-weight: bold;
+}
 #logo{
     font-size: 60px;
 }
 .jumbotron{
     background:#F3F6FF;
+}
+.list-tareas{
+    padding-top: 20px;
+}
+.btn-evaluar{
+    background-color: #9ABE05;
+    color: #F3F6FF;
+   
+}
+.btn-juego{
+    background-color:#1C1C1F;
+    color:#F3F6FF ;
+}
+.btn-juego:hover{
+    background-color:#1C1C1F;
+    color:#F3F6FF ;
 }

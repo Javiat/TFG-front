@@ -1,37 +1,57 @@
 <div *ngIf="identity" class="head-page">
-    <div class="col-md-2">
+    <div class="col-md-4">
+            <div class="row list-tareas" >
+        
+            </div>
+
         <div class="row">
             <h1>{{title}}</h1>
-            <a [routerLink]="['/add-task',id]" class="btn btn-default">
-               Añadir Tarea
-            </a>
         </div>
+       
+
         <div id="list-tasks" *ngIf="tasks">
             <div class="row">
-                    <div  *ngFor="let task of tasks" [routerLink]="['/update-task/',task._id]"  style="max-width: 18rem;">
-                        <div id="tasks" *ngIf="task.type=='solida'" class="card text-white bg-danger mb-3">
+                    <div  *ngFor="let task of tasks" [routerLink]="['/update-task/',task._id]" class="col-md-6" style="max-width: 18rem;">
+                        <div id="tasks" *ngIf="task.type=='liquida'" class="card text-white bg-info ">
                                 <div  class="card-header">{{task.title}}</div>
-                                <div class="card-body">
-                                <p class="card-text">Inicio:{{task.start}}</p>
-                                <p class="card-text">Fin:{{task.end}}</p>
-                                </div>
+                               
                         </div>
-                        <div id="tasks" *ngIf="task.type=='liquida'" class="card text-white bg-info mb-3">
+                    </div>
+                    <div  *ngFor="let task of tasks" [routerLink]="['/update-task/',task._id]" class="col-md-6" style="max-width: 18rem;">
+                        <div id="tasks" *ngIf="task.type=='solida'" class="card text-white bg-danger ">
                                 <div  class="card-header">{{task.title}}</div>
-                                <div class="card-body">
-                                <p class="card-text">Inicio:{{task.start}}</p>
-                                <p class="card-text">Fin:{{task.end}}</p>
-                                </div>
-                        </div>      
-                      </div>
+                                
+                        </div>
+                            
+                    </div>         
+            </div>
+            <div class="list-tareas">
+                    <a [routerLink]="['/add-task',id]" class="btn btn-juego">
+                        Añadir Tarea
+                    </a>
             </div>
                  
         </div>
     </div>
-    <div  class="col-md-10">
-            <a (click)="loadevents()"> loadevents</a>
-        <p>Display event : {{displayEvent | json}}</p>
-        <div *ngIf="calendarOptions" >
+    <div  class="col-md-8">
+        <div class="row list-tareas">
+                <div class="col-md-4" style="text-align:left;">
+                        <a (click)="loadevents()" class="btn btn-juego">
+                            Cargar caso
+                        </a>
+                        <a (click)="loadevents()" class="btn btn-evaluar">
+                                Evaluar
+                            </a>
+                </div>
+                <div class="col-md-8" >
+                <!-- <a (click)="loadevents()"> loadevents</a> -->
+                    <p>Display event : {{displayEvent | json}}</p>
+                </div>
+
+        </div>
+
+
+        <div *ngIf="calendarOptions" class="list-tareas" >
             <ng-fullcalendar #ucCalendar   [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
                 (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
         </div>
