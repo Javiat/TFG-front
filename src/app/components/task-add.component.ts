@@ -28,7 +28,7 @@ export class TaskAddComponent implements OnInit{
     ){
         this.titulo='Crear una nueva tarea';
         this.identity=this._userService.getIdentity();
-        this.task=new Task('','','',null,null,'','','');
+        this.task=new Task('','','','Agenda Personal',null,null,'','','');
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
     }
@@ -42,6 +42,7 @@ export class TaskAddComponent implements OnInit{
         this._route.params.forEach((params:Params) => {
             let user_id=params['user'];
             this.task.user=user_id;
+            console.log(params);
             this._taskService.addTask(this.task).subscribe(
                 response=>{
                     if(!response.task){
@@ -49,7 +50,7 @@ export class TaskAddComponent implements OnInit{
                     }else{
                         this.alertMessage='La tarea se ha creado correctamente';
                         this.task=response.task;
-                        this._router.navigate(['/tasks']);
+                        this._router.navigate(['/agenda']);
                     }
                 },
                 error=>{
@@ -64,4 +65,5 @@ export class TaskAddComponent implements OnInit{
         });
         console.log(this.task);
     }
+
 }

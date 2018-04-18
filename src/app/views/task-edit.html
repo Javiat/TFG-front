@@ -6,31 +6,39 @@
             </div>
         </div>
     <form #formTask="ngForm" (ngSubmit)="onSubmit()">
+            <p>
+                    <label>Título:</label>
+                    <input type="text" #title="ngModel" name="title" [(ngModel)]="task.title" class="form-control" required/>
+                  </p>
+                 
+                  <p>
+                    <label>Localización:</label>
+                    <input type="text" #localizacion="ngModel" name="localizacion" [(ngModel)]="task.localizacion" class="form-control" required/>
+                </p>
+                  <p>
+                    <label>Fecha de inicio:</label>
+                    <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local" class="form-control" required/>
+                  </p>
+                  <p>
+                    <label>Fecha de fin:</label>
+                    <input #end="ngModel" name="end" [(ngModel)]="task.end" type="datetime-local" class="form-control" required/>
+                  </p>
+                  <p>
+                    <label>Duracion</label>
+                    <input #duration="ngModel" name="end" [(ngModel)]="task.duration" type="text" class="form-control" required/>
+                  </p>
+                  <p>
+                    <label>Tipo:</label>
+                    <select type="options" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required>
+                        <option value="liquida">Liquida</option>
+                        <option value="solida">Solida</option>
+                    </select>
+                  </p>
         <p>
-            <label>Título:</label>
-            <input type="text" #title="ngModel" name="title" [(ngModel)]="task.title" class="form-control" required/>
-          </p>
-          <p>
-              <label>Descripción:</label>
-              <input type="text" #description="ngModel" name="description" [(ngModel)]="task.description" class="form-control" required/>
-          </p>
-          <!-- <p>
-            <label>Fecha de inicio:</label>
-            <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local" class="form-control" required/>
-          </p>
-          <p>
-            <label>Fecha de fin:</label>
-            <input #end="ngModel" name="end" [(ngModel)]="task.end" type="datetime-local" class="form-control" required/>
-          </p> -->
-          <p>
-              <label>Tipo:</label>
-              <input type="text" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required/>
-          </p>
-          <p>
-                <input (click)="onSubmit()" class="btn btn-success" value="Actualizar" [disabled]="!formTask.form.valid" />
+                <input (click)="onSubmit()" class="btn btn-success" value="Actualizar"  />
           </p>
           <P>
-            <input  (click)="onDeleteTask(task._id)" class="btn btn-danger" value="Eliminar" [disabled]="!formTask.form.valid" />
+            <input  (click)="onDeleteTask(task._id)" class="btn btn-danger" value="Eliminar"  />
           </P>
     </form>
 </div>

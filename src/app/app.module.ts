@@ -5,22 +5,22 @@ import { HttpModule } from '@angular/http';
 import {routing,appRoutingProviders} from './app.routing';
 import { AppComponent } from './app.component';
 import {UserEditComponent} from './components/user-edit.component';
-import {TaskListComponent} from './components/task-list.component';
+import {GameComponent} from './components/game.component';
 import {HomeComponent} from './components/home.component';
 import {TaskAddComponent} from './components/task-add.component';
 import {TaskEditComponent} from './components/task-edit.component';
-
+import{AgendaComponent} from './components/agenda.component';
 import { FullCalendarModule } from 'ng-fullcalendar';
-
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     UserEditComponent,
-    TaskListComponent,
+    GameComponent,
     HomeComponent,
     TaskAddComponent,
-    TaskEditComponent
-
+    TaskEditComponent,
+    AgendaComponent
 
   ],
   imports: [
@@ -28,7 +28,8 @@ import { FullCalendarModule } from 'ng-fullcalendar';
     FormsModule,
     HttpModule,
     routing,
-    FullCalendarModule
+    FullCalendarModule,
+    HttpClientModule
   ],
   providers: [appRoutingProviders],
   bootstrap: [AppComponent]

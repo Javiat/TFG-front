@@ -3,14 +3,16 @@ import { User } from './models/user';
 import { UserService } from './services/user.service';
 import {GLOBAL} from './services/global';
 import {Router, ActivatedRoute, Params} from '@angular/router';
+import { EventService } from './services/event.service';
+import {TaskService} from './services/task.service';
+import { Task } from './models/task';
 
-declare var jQuery:any;
-declare var $:any;
-declare var fn:any;
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers:[UserService]
+  providers:[UserService,EventService,TaskService]
 })
 export class AppComponent implements OnInit{
   public title = 'Calendar';
@@ -18,16 +20,17 @@ export class AppComponent implements OnInit{
   public user_register:User;
   public identity;
   public alertRegister;
-  //public token;
   public errorMessage;
   public url;
-
+  events=null;
 
 
   constructor(
     private _userService:UserService,
     private _route:ActivatedRoute,
-    private _router:Router
+    private _router:Router,
+    private eventService:EventService,
+    private _taskService:TaskService
   ){
     this.user=new User('','','','','','');
     this.user_register=new User('','','','','','');
@@ -39,7 +42,6 @@ export class AppComponent implements OnInit{
   }
 
   public onSubmit(){
-
     //Conseguir los datos del usuario
     this._userService.signup(this.user).subscribe(
       response=>{
@@ -82,6 +84,31 @@ export class AppComponent implements OnInit{
         }else{
           this.alertRegister='El registro se ha realizado correctamente,identificate con'+ this.user_register.email;
           this.user_register=new User('','','','','','');
+          this.eventService.getEvents().subscribe(data => {
+            this.events=data;
+            for(var i=0;i<this.events.length;i++){
+                     this.events[i].user=user._id;
+                     this._taskService.addTask(this.events[i]).subscribe(
+                       response=>{
+                           if(!response.tasks){
+                             
+                           }else{
+                               this.alertRegister='El registro se ha realizado correctamente, identificate con '+ this.user_register.email;
+                               
+                               console.log(response);
+                           }
+                       },
+                       error=>{
+                           var errorMessage=<any>error;
+                           if(errorMessage!=null){
+                             var body=JSON.parse(error._body);
+                             this.alertRegister=body.message;
+                           }
+                      }
+        
+                   );
+                   }
+                  });
         }
       },
       error=>{
@@ -93,5 +120,6 @@ export class AppComponent implements OnInit{
         }
       }
     );
+    
   }
 }

@@ -33,7 +33,7 @@ export class TaskEditComponent implements OnInit{
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.is_edit=true;
-        this.task=new Task('','','',null,null,'','','');
+        this.task=new Task('','','','Agenda Personal',null,null,'','','');
     }
 
     ngOnInit(){
@@ -52,7 +52,7 @@ export class TaskEditComponent implements OnInit{
                         console.log('Este usuario no tiene tareas');
                        
                     }else{
-                        
+                        console.log(response);
                         this.task=response.task;
                     }
                 },
@@ -76,7 +76,7 @@ export class TaskEditComponent implements OnInit{
                     }else{
                         this.alertUpdate='La tarea se ha actualizado correctamente';
                         this.task=response.task;
-                        this._router.navigate(['/tasks']);
+                        this._router.navigate(['/agenda']);
                     }
                 },
                 error=>{
@@ -96,7 +96,7 @@ export class TaskEditComponent implements OnInit{
                 if(!response.task){
                     this.alertUpdate='Error en el servidor';
                 }
-                this._router.navigate(['/tasks']);
+                this._router.navigate(['/agenda']);
             },
             error=>{
                 var errorMessage=<any>error;

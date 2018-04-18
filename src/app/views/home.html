@@ -1,9 +1,49 @@
-<div class="col-lg-8 ">
-  <div class="jumbotron">
+<div class="col-md-12 ">
+  <!-- <div class="jumbotron">
     <h1 class="display-4">{{title}}</h1>
-    <p>Tu aplicacion para gestionar tus tareas.</p>
-    <p class="lead" >
-      <a [routerLink]="['/tasks']" class="btn btn-index"  role="button">Comenzar</a>
+     <p class="col-md-4" >
+
+      <a [routerLink]="['/agenda']" class="btn btn-index"  role="button">Agenda</a>
     </p>
+    <p class="col-md-4" >
+        <a [routerLink]="['/game']" class="btn btn-index"  role="button">Agenda Presidente</a>
+    </p>
+    <div class="col-m-6">
+        <div class="" id="tasks" style="width: 18rem;" [routerLink]="['/agenda']" >
+          <div   class="card text-white bg-info">
+              <div  class="card-header">Agenda Personal</div>
+              
+          </div>
+        </div>
+    </div>
+    <p>Modulo Agenda Personal</p>
+    <div class="col-m-6">
+        <p>Modulo Aprendizaje</p>
+        <div class=" text-white bg-danger" id="tasks" style="width: 18rem;" [routerLink]="['/game']" >
+          <div   class="card text-white bg-danger">
+              <div  class="card-header">Agenda Presidente</div>
+              
+          </div>
+        </div>
+    </div>
+   
+  </div> -->
+  <div class="row">
+    <div class="col-md-12">
+        <h1 style="text-align: center;">{{title}}</h1>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-6" style="text-align: center;">
+            <h2>Modulo Agenda Personal</h2>
+            <p>Sección dedicada a tu agenda personal donde llevar un control de tu dia a dia.</p>
+            <a href="agenda" class="btn btn-index"  role="button">Agenda</a>
+          </div>
+          <div class="col-md-6" style="text-align: center;">
+            <h2>Modulo Aprendizaje</h2>
+            <p>Seccion dedicada al autoaprendizaje con diferentes ejemplos. Accede a un ejemplo, realiza tu planificacion y observa los resultados.</p>
+            <a  class="btn btn-index" (click)="juego()" href="game" role="button">Agenda Presidente</a>
+          </div>
+    
+        </div>     
   </div>
 </div>

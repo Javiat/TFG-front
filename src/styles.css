@@ -18,11 +18,15 @@ html,body{
     margin-bottom: 25px;
     display: block;
 }
+#navigation{
+    margin-top: 40px;
+}
 .navigation{
     text-align: center;
     color: white;
     background: #1C1C1F;
     height: 100%;
+
 }
 .navigation a{
     color: #F3F6FF;
@@ -30,9 +34,14 @@ html,body{
     margin-bottom: 20px;
     display: block;
     text-decoration: none;
+    font-size: 18px;
 }
 .navigation a:over{
     color:white;
+}
+.navigation .head-title{
+    font-size: 21px;
+    border-bot: 1px solid #444;
 }
 .navigation .glyphicon{
     font-size: 25px;
@@ -57,7 +66,9 @@ html,body{
     overflow: hidden;
 
 }
-
+.icon-menu{
+    font-size: 18px;
+}
 #user_logged .user-image img{
     width: 57px; 
 }
@@ -68,7 +79,7 @@ html,body{
     margin-top: 10px;
     border-radius: 9px;
     padding: 4px 17px;
-    
+    height: 48px;
     cursor: pointer;
 }
 .bg-danger {
@@ -104,12 +115,12 @@ html,body{
     font-weight: bold;
 }
 .btn-index{
-    background-color: #477EBD;
+    background-color: #53B4BD;
     color: #F3F6FF;
     font-weight: bold;
 }
 .btn-index:hover{
-    background-color: #477EBD;
+    background-color: #53B4BD;
     color: #F3F6FF;
     font-weight: bold;
 }
@@ -135,3 +146,8 @@ html,body{
     background-color:#1C1C1F;
     color:#F3F6FF ;
 }
+
+.card-img-top{
+    height: 100px;
+}
+

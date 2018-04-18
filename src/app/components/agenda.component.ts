@@ -10,12 +10,12 @@ import {TaskService} from '../services/task.service';
 import { CalendarComponent } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 @Component({
-    selector:'task-list',
-    templateUrl:'../views/task-list.html',
+    selector:'agenda',
+    templateUrl:'../views/agenda.html',
     providers:[UserService,TaskService,EventService]
 })
 
-export class TaskListComponent implements OnInit{
+export class AgendaComponent implements OnInit{
     public title:string;
     public tasks:Task[];
     public identity;
@@ -44,7 +44,7 @@ export class TaskListComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('task-list.component.ts cargado');
+        console.log('game.component.ts cargado');
         //Conseguir el listado de tareas
         this.calendarOptions = {
           editable: true,
@@ -67,7 +67,7 @@ export class TaskListComponent implements OnInit{
                
             }else{
                 this.tasks=response.tasks;
-                this.events=[this.tasks.length];
+                
                 for(var i=0;i<this.tasks.length;i++){
                   this.events[i]={
                     id:this.tasks[i]._id,
@@ -75,6 +75,8 @@ export class TaskListComponent implements OnInit{
                     start:this.tasks[i].start,
                     end: this.tasks[i].end,
                     type:this.tasks[i].type,
+                    description:this.tasks[i].description,
+                    
                   }
                   if(this.events[i].type=='liquida'){
                     this.events[i].color='#53B4BD'
@@ -94,37 +96,12 @@ export class TaskListComponent implements OnInit{
         }
     )  
     }
-    //  loadevents() {
-    // //   this.events=[this.tasks.length];
-    // //   console.log(this.events);
-    // //   for(var i=0;i<this.tasks.length;i++){
-    // //     this.events[i]={
-    // //       id:this.tasks[i]._id,
-    // //       title: this.tasks[i].title,
-    // //       start:this.tasks[i].fecha_inicio,
-    // //       end: this.tasks[i].fecha_fin,
-    // //       type:this.tasks[i].type,
-    // //       duration:this.tasks[i].duration
-    // //     }
-    // //   }
-          
-    //   //   console.log(this.events);
-    //   this.events= [
-    //     {
-    //         start: '2018-04-04',
-    //         end: '2018-04-04',
-    //         overlap: false,
-    //         rendering: 'background',
-    //         color: '#257e4a'
-    //     },
-    //     {
-    //        start: '2018-04-05',
-    //          end: '2018-04-05',
-    //         overlap: false,
-    //         rendering: 'background',
-    //         color: '#ff9f89'
-    //     }]
-    //   }
+      loadevents() {
+        // this.eventService.getEvents().subscribe(data => {
+        //   this.events = data;
+        // });
+        console.log(this.events);
+       }
       clickButton(model: Task) {
         this.displayEvent = model;
       }

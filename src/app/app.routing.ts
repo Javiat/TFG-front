@@ -5,7 +5,8 @@ import {Routes,RouterModule} from '@angular/router';
 import {UserEditComponent} from './components/user-edit.component'
 
 //Import Tareas
-import {TaskListComponent} from './components/task-list.component';
+import {GameComponent} from './components/game.component';
+import {AgendaComponent} from './components/agenda.component';
 import {TaskAddComponent} from './components/task-add.component';
 import {TaskEditComponent} from './components/task-edit.component';
 //Import Home
@@ -14,10 +15,11 @@ import {HomeComponent} from './components/home.component';
 const appRoutes:Routes=[
     {path:'home',component:HomeComponent},
     {path:'mis-datos',component:UserEditComponent},
-    {path:'tasks',component:TaskListComponent},
+    {path:'game',component:GameComponent},
+    {path:'agenda',component:AgendaComponent},
     {path:'add-task/:user',component:TaskAddComponent},
     {path:'update-task/:id',component:TaskEditComponent},
-    {path:'update-event/:id',component:TaskListComponent},
+    {path:'update-event/:id',component:GameComponent},
     {path:'delete-task/:id',component:TaskEditComponent},
     {path:'**',component:HomeComponent},
 
