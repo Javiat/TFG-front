@@ -6,6 +6,8 @@ import {UserService} from '../services/user.service';
 import {TaskService} from '../services/task.service';
 import {Task} from '../models/task';
 import {User} from '../models/user';
+import { CalendarComponent, FullCalendarModule } from 'ng-fullcalendar';
+import { Options } from 'fullcalendar';
 @Component({
     selector:'task-add',
     templateUrl:'../views/task-add.html',
@@ -20,6 +22,10 @@ export class TaskAddComponent implements OnInit{
     public url:String;
     public id;
     public alertMessage;
+    public calendarOptions: Options;
+    public tasks:Task[];
+    public events=[];
+    displayEvent: any;
     constructor(
         private _route:ActivatedRoute,
         private _router:Router,
@@ -28,16 +34,63 @@ export class TaskAddComponent implements OnInit{
     ){
         this.titulo='Crear una nueva tarea';
         this.identity=this._userService.getIdentity();
-        this.task=new Task('','','','Agenda Personal',null,null,'','','');
+        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'');
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
+        this.calendarOptions = {
+            header: {
+              left: 'prev,next today',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay,listMonth'
+          },
+        editable: true,
+        eventLimit: false,
+        events:this.events
+        
+        };       
     }
 
     ngOnInit(){
         console.log('task-add.component cargado');
         //Conseguir el listado de tareas
-
+        this.getTasks();
     }
+    getTasks(){
+        this._taskService.getTasks(this.id).subscribe(
+          response=>{
+              if(!response.tasks){
+                  console.log('Este usuario no tiene tareas');  
+              }else{
+                  this.tasks=response.tasks;
+                  this.events.length=this.tasks.length;
+                    for(var i=0;i<this.tasks.length;i++){
+                        this.events[i]={
+                            id:this.tasks[i]._id,
+                            title: this.tasks[i].title,
+                            start:this.tasks[i].start,
+                            end: this.tasks[i].end,
+                            type:this.tasks[i].type,
+                            escription:this.tasks[i].description
+                        }
+                        if(this.events[i].type=='liquida'){
+                            this.events[i].color='#53B4BD'
+                        }else{
+                            this.events[i].color='#C23E3D'
+                        }
+                        }
+                    
+              }
+          },
+          error=>{
+              var errorMessage=<any>error;
+              if(errorMessage!=null){
+                var body=JSON.parse(error._body);
+                
+              }
+          }
+          )
+              
+      }
     onSubmit(){
         this._route.params.forEach((params:Params) => {
             let user_id=params['user'];

@@ -1,4 +1,4 @@
-<div class="col-lg-6">
+<div class="col-md-4">
     <h1>{{titulo}}</h1>
     <div *ngIf="alertMessage">
         <div class="alert alert-info">
@@ -44,5 +44,11 @@
             <input type="submit" class="btn btn-success" value="Crear"  />
         </p>
 </form>
+</div>
+<div class="col-md-8">
+        <div  id="calendarOptions" class="list-tareas" >
+          <ng-fullcalendar #ucCalendar   [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+              (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+        </div>
 </div>
 

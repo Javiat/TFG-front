@@ -29,9 +29,7 @@ export class HomeComponent implements OnInit{
     }
 
     ngOnInit(){
-        console.log('home.component.ts cargado');
-        
-       
+        console.log('home.component.ts cargado'); 
         //Conseguir el listado de tareas
     }
 
@@ -45,7 +43,7 @@ export class HomeComponent implements OnInit{
                        response=>{
                            if(!response.tasks){
                            }else{ 
-                               //console.log(response);
+                               console.log(response);
                            }
                        },
                        error=>{
@@ -55,5 +53,6 @@ export class HomeComponent implements OnInit{
                    );
                    }
         })
+        
     }
 }

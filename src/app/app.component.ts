@@ -84,31 +84,6 @@ export class AppComponent implements OnInit{
         }else{
           this.alertRegister='El registro se ha realizado correctamente,identificate con'+ this.user_register.email;
           this.user_register=new User('','','','','','');
-          this.eventService.getEvents().subscribe(data => {
-            this.events=data;
-            for(var i=0;i<this.events.length;i++){
-                     this.events[i].user=user._id;
-                     this._taskService.addTask(this.events[i]).subscribe(
-                       response=>{
-                           if(!response.tasks){
-                             
-                           }else{
-                               this.alertRegister='El registro se ha realizado correctamente, identificate con '+ this.user_register.email;
-                               
-                               console.log(response);
-                           }
-                       },
-                       error=>{
-                           var errorMessage=<any>error;
-                           if(errorMessage!=null){
-                             var body=JSON.parse(error._body);
-                             this.alertRegister=body.message;
-                           }
-                      }
-        
-                   );
-                   }
-                  });
         }
       },
       error=>{

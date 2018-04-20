@@ -9,13 +9,13 @@
             </div>
             <div id="list-tasks" *ngIf="tasks" class="row">
                     <div  *ngFor="let task of tasks"  class="col-md-6">
-                        <div class=" card text-white bg-danger" id="tasks" *ngIf="task.type=='solida'"  [routerLink]="['/update-task/',task._id]">
+                        <div class=" card text-white bg-danger" id="tasks" *ngIf="task.type=='solida'"  [routerLink]="['/update-task-agenda/',task._id]">
                             <div   class=" card text-white bg-danger">
                                 <div  class="card-header">{{task.title}}</div>
                                 
                             </div>
                         </div>
-                        <div class=" text-white bg-info" id="tasks" *ngIf="task.type=='liquida'"  [routerLink]="['/update-task/',task._id]">
+                        <div class=" text-white bg-info" id="tasks" *ngIf="task.type=='liquida'"  [routerLink]="['/update-task-agenda/',task._id]">
                                 <div   class="card text-white bg-info">
                                     <div  class="card-header">{{task.title}}</div>
                                     

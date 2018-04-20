@@ -10,6 +10,7 @@ html,body{
 .active{
     border-bottom: 4px solid #9ABE05;
     padding-bottom: 4px;
+  
 }
 .head-title{
     font-size: 20px;
@@ -23,10 +24,9 @@ html,body{
 }
 .navigation{
     text-align: center;
-    color: white;
+    color:#F3F6FF;
     background: #1C1C1F;
     height: 100%;
-
 }
 .navigation a{
     color: #F3F6FF;
@@ -41,7 +41,7 @@ html,body{
 }
 .navigation .head-title{
     font-size: 21px;
-    border-bot: 1px solid #444;
+    border-bottom: 1px solid #444;
 }
 .navigation .glyphicon{
     font-size: 25px;
@@ -79,8 +79,9 @@ html,body{
     margin-top: 10px;
     border-radius: 9px;
     padding: 4px 17px;
-    height: 48px;
+    height: 55px;
     cursor: pointer;
+    font-size: 12px;
 }
 .bg-danger {
     background-color: #C23F3E;
@@ -151,3 +152,6 @@ html,body{
     height: 100px;
 }
 
+.icon-home{
+    color:#53B4BD;
+}

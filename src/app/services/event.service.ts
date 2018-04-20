@@ -39,7 +39,7 @@ export class EventService {
             description:'Agenda Presidente',
             localizacion:'Madrid',
             start: '2018-04-06T13:00:00Z',
-            end:null,
+            end:'2018-04-06T17:00:00Z',
             duration:'04:00',
             type:'liquida',
             user:''
@@ -49,7 +49,7 @@ export class EventService {
             description:'Agenda Presidente',
             localizacion:'Barcelona',
             start: '2018-04-05T13:00:00Z',
-            end:'2018-04-09T15:00:00Z',
+            end:'2018-04-04T15:00:00Z',
             duration:'02:00',
             type:'solida',
             user:''

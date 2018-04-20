@@ -1,29 +1,45 @@
 <div *ngIf="identity" class="head-page">
-    <div class="col-md-4">
-            <div class="row list-tareas" >
-        
-            </div>
-
-        <div class="row">
-            <h1>{{title}}</h1>
-        </div>
-        
-        <div  id="list-tasks"  class="row" *ngIf="tasks">
-                    <div  *ngFor="let task of tasks"  class="col-md-6" >
-                        <div class=" card text-white bg-danger " id="tasks"  *ngIf="task.type=='solida'" [routerLink]="['/update-task/',task._id]" >
-                            <div   class=" card text-white bg-danger">
-                                <div  class="card-header">{{task.title}}</div>
+    <div class="col-md-4">    
+        <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
+                <h3>Tareas sin planificar</h3>
+                 
+                    <div  *ngFor="let task of tasks" class="col-md-6">
+                            <div class=" text-white bg-info " id="tasks" *ngIf="task.type=='liquida' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}}</div>
                                 
-                            </div>
-                        </div>
-                        <div class=" text-white bg-info" id="tasks" *ngIf="task.type=='liquida'"  [routerLink]="['/update-task/',task._id]" >
-                                <div   class="card text-white bg-info">
-                                    <div  class="card-header">{{task.title}}</div>
-                                    
                                 </div>
                             </div>
+                        <div class=" card text-white bg-danger " id="tasks"  *ngIf="task.type=='solida' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger">
+                                <div class="card-header">{{task.title}} {{task.localizacion}}</div>
+                                <p>Fecha:{{task.start.slice(5,10)}}-2018</p>
+                            </div>
+                        </div>
+                       
                     </div>
-                         
+                
+        </div>
+        <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
+        
+            <h3>Tareas planificadas</h3>
+                        <div  *ngFor="let task of tasks" class="col-md-6"  >
+                                <div class=" card text-white bg-danger " id="tasks"  *ngIf="task.type=='solida' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                                    <div  class=" card text-white bg-danger">
+                                        <div class="card-header">{{task.title}} {{task.localizacion}}</div>
+                                        <p>Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                    </div>
+                                </div>
+                                <div class=" text-white bg-info" id="tasks" *ngIf="task.type=='liquida' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                    <div   class="card text-white bg-info">                                        
+                                    <div class="card-header">{{task.title}} {{task.localizacion}}</div>
+                                    <p >Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                    </div>
+                                </div>
+                           
+                           
+                        </div>
+                
         </div>
        
     </div>

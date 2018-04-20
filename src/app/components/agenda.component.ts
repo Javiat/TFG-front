@@ -26,7 +26,7 @@ export class AgendaComponent implements OnInit{
     public type;
     calendarOptions: Options;
     displayEvent: any;
-    events = null;
+    public events = null;
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _route:ActivatedRoute,
@@ -67,7 +67,7 @@ export class AgendaComponent implements OnInit{
                
             }else{
                 this.tasks=response.tasks;
-                
+                this.events.length=this.tasks.length;
                 for(var i=0;i<this.tasks.length;i++){
                   this.events[i]={
                     id:this.tasks[i]._id,

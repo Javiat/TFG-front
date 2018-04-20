@@ -9,6 +9,7 @@ export class Task{
         public end:Date,
         public duration:string,
         public type:string,
+        public colocado:Boolean,
         public user:string
     ){}
 }

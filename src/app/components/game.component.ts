@@ -24,6 +24,8 @@ import 'jquery';
 export class GameComponent implements OnInit{
     public title:string;
     public tasks:Task[];
+    public solidas:Task[];
+    public liquidas:Task[];
     public task:Task;
     public game:Task[];
     public identity;
@@ -36,29 +38,21 @@ export class GameComponent implements OnInit{
     calendarOptions: Options;
     calendar:FullCalendarModule;
     displayEvent: any;
-    events = null;
-    events2=null;
+    public events =[];
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _router:Router,
         private _route:ActivatedRoute,
-       
         private _userService:UserService,
         private _taskService:TaskService,
         private eventService:EventService,
         private httpService: HttpClient      
     ){
         this.title='Listado de tareas';
-        this.task=new Task('','','','',null,null,'','','');
+        this.task=new Task('','','','',null,null,'','',null,'');
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
-        
-    }
-
-    ngOnInit(){
-        console.log('game.component.ts cargado');
-        //Conseguir el listado de tareas
         this.calendarOptions = {
           header: {
             left: 'prev,next today',
@@ -66,43 +60,61 @@ export class GameComponent implements OnInit{
             right: 'month,agendaWeek,agendaDay,listMonth'
         },
         editable: true,
-        droppable: true, // this allows things to be dropped onto the calendar
-        dragRevertDuration: 0,
-        events:[]
+        eventLimit: false,
+        events:this.events
         };
+        console.log(this.events);
+    }
+
+    ngOnInit(){
+        console.log('game.component.ts cargado');
+        //Conseguir el listado de tareas 
        this.getTasks();
       
     }
    
-   
-    
+  //  solucion_inicial(){ 
+  //   this.events=[this.tasks.length];
+  //     for(var i=0;i<this.tasks.length;i++){
+  //         this.events[i]={
+  //           id:this.tasks[i]._id,
+  //           title: this.tasks[i].title,
+  //           start:this.tasks[i].start,
+  //           end: this.tasks[i].end,
+  //           type:this.tasks[i].type,
+  //           escription:this.tasks[i].description
+  //         }
+  //         if(this.events[i].type=='liquida'){
+  //           this.events[i].color='#53B4BD'
+  //         }else{
+  //           this.events[i].color='#C23E3D'
+  //         }
+  //       }
+  //  }   
     getTasks(){
       this._taskService.getTasksGame(this.id).subscribe(
         response=>{
             if(!response.tasks){
-                this.alertMessage='Este usuario no tiene tareas';
-               
+                this.alertMessage='Este usuario no tiene tareas';  
             }else{
-              console.log(response);
                 this.tasks=response.tasks;
-                this.events[this.tasks.length];
+                this.events.length=this.tasks.length;
                 for(var i=0;i<this.tasks.length;i++){
-                  this.events[i]={
-                    id:this.tasks[i]._id,
-                    title: this.tasks[i].title,
-                    start:this.tasks[i].start,
-                    end: this.tasks[i].end,
-                    type:this.tasks[i].type,
-                    description:this.tasks[i].description
+                    this.events[i]={
+                      id:this.tasks[i]._id,
+                      title: this.tasks[i].title,
+                      start:this.tasks[i].start,
+                      end: this.tasks[i].end,
+                      type:this.tasks[i].type,
+                      description:this.tasks[i].description
+                    }
+                    if(this.events[i].type=='liquida'){
+                      this.events[i].color='#53B4BD'
+                    }else{
+                      this.events[i].color='#C23E3D'
+                    }
                   }
-                  if(this.events[i].type=='liquida'){
-                    this.events[i].color='#53B4BD'
-                  }else{
-                    this.events[i].color='#C23E3D'
-                  }
-                }
             }
-            
         },
         error=>{
             var errorMessage=<any>error;

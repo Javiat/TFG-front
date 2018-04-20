@@ -8,7 +8,8 @@ import {UserEditComponent} from './components/user-edit.component'
 import {GameComponent} from './components/game.component';
 import {AgendaComponent} from './components/agenda.component';
 import {TaskAddComponent} from './components/task-add.component';
-import {TaskEditComponent} from './components/task-edit.component';
+import {TaskGameEditComponent} from './components/taskgame-edit.component';
+import {TaskAgendaEditComponent} from './components/taskagenda-edit-component';
 //Import Home
 import {HomeComponent} from './components/home.component';
 
@@ -18,9 +19,10 @@ const appRoutes:Routes=[
     {path:'game',component:GameComponent},
     {path:'agenda',component:AgendaComponent},
     {path:'add-task/:user',component:TaskAddComponent},
-    {path:'update-task/:id',component:TaskEditComponent},
+    {path:'update-task/:id',component:TaskGameEditComponent},
+    {path:'update-task-agenda/:id',component:TaskAgendaEditComponent},
     {path:'update-event/:id',component:GameComponent},
-    {path:'delete-task/:id',component:TaskEditComponent},
+    {path:'delete-task/:id',component:TaskGameEditComponent},
     {path:'**',component:HomeComponent},
 
 ];

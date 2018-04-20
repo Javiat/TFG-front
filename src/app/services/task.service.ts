@@ -44,7 +44,6 @@ export class TaskService{
 }
 
    addTask(task:Task){
-       console.log(task);
         let params=JSON.stringify(task);
         let headers=new Headers({
             'Content-Type':'application/json'
