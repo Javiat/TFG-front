@@ -1,4 +1,5 @@
 import {Component,OnInit,ViewChild} from '@angular/core';
+import {  OnChanges, SimpleChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { EventService } from '../services/event.service';
 import { HttpModule }      from '@angular/http';
@@ -21,9 +22,10 @@ import 'jquery';
     providers:[UserService,TaskService,EventService]
 })
 
-export class GameComponent implements OnInit{
+export class GameComponent implements OnInit {
     public title:string;
     public tasks:Task[];
+    public tasks_planificadas=[];
     public solidas:Task[];
     public liquidas:Task[];
     public task:Task;
@@ -49,29 +51,38 @@ export class GameComponent implements OnInit{
         private httpService: HttpClient      
     ){
         this.title='Listado de tareas';
-        this.task=new Task('','','','',null,null,'','',null,'');
+        this.task=new Task('','','','',null,null,'','',null,'','');
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
-        this.calendarOptions = {
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,listMonth'
-        },
-        editable: true,
-        eventLimit: false,
-        events:this.events
-        };
-        console.log(this.events);
+        
     }
 
     ngOnInit(){
         console.log('game.component.ts cargado');
         //Conseguir el listado de tareas 
-       this.getTasks();
       
-    }
+       this.getTasks();
+       this.calendarOptions = {
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+      },
+      businessHours: {
+        
+        start: '09:00', // hora final
+        end: '21:00', // hora inicial
+        dow: [ 1, 2, 3, 4, 5 ], // dias de semana, 0=Domingo
+        
+      },
+      editable: true,
+      eventLimit: false,
+      events:this.events,
+      eventConstraint: "businessHours"
+      };
+      
+      }
    
   //  solucion_inicial(){ 
   //   this.events=[this.tasks.length];
@@ -106,15 +117,13 @@ export class GameComponent implements OnInit{
                       start:this.tasks[i].start,
                       end: this.tasks[i].end,
                       type:this.tasks[i].type,
-                      description:this.tasks[i].description
+                      description:this.tasks[i].description,
+                      color:this.tasks[i].color
                     }
-                    if(this.events[i].type=='liquida'){
-                      this.events[i].color='#53B4BD'
-                    }else{
-                      this.events[i].color='#C23E3D'
-                    }
+                    
                   }
             }
+            console.log(this.tasks);
         },
         error=>{
             var errorMessage=<any>error;
@@ -159,7 +168,7 @@ export class GameComponent implements OnInit{
       }
       
       eventClick(model: any) {
-       
+      
         model = {
           event: {
             id: model.event.id,
@@ -174,39 +183,46 @@ export class GameComponent implements OnInit{
         this.displayEvent = model;
       }
       updateEvent(model: any) {
-        model = {
-          event: {
-            id: model.event.id,
-            start: model.event.start,
-            end: model.event.end,
-            title: model.event.title,
-            type:model.event.type
-            // other params
-          },
-          duration: {
-            _data: model.duration._data
-          }  
-        }
-
-        this._taskService.updateEvent(model.event.id,model.event).subscribe(
-          response=>{
-              if(!response.task){
-                  this.alertMessage='Error en el servidor';
-              }else{
-                  console.log('La tarea se ha actualizado correctamente');
-                  this.getTasks();
-              }
-          },
-          error=>{
-              var errorMessage=<any>error;
-              if(errorMessage!=null){
-                var body=JSON.parse(error._body);
-                this.alertMessage=body.message;
-              }
+        if(model.event.type=='solida'){
+          console.log('No se actualiza');
+        }else{
+          model = {
+            event: {
+              id: model.event.id,
+              start: model.event.start,
+              end: model.event.end,
+              title: model.event.title,
+              type:model.event.type
+              // other params
+            },
+            duration: {
+              _data: model.duration._data
+            }
+            
           }
-
-      );
+         
+          this._taskService.updateEvent(model.event.id,model.event).subscribe(
+            response=>{
+                if(!response.task){
+                    this.alertMessage='Error en el servidor';
+                }else{
+                    console.log('La tarea se ha actualizado correctamente');
+                    this.getTasks();
+                }
+            },
+            error=>{
+                var errorMessage=<any>error;
+                if(errorMessage!=null){
+                  var body=JSON.parse(error._body);
+                  this.alertMessage=body.message;
+                }
+            }
+  
+        );
         this.displayEvent = model; 
+        }
+      
+        
        }
         // leerArchivo(fileInput:any){
     //   var archivo = fileInput.target.files[0];

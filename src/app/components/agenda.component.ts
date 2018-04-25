@@ -54,6 +54,7 @@ export class AgendaComponent implements OnInit{
             center: 'title',
             right: 'month,agendaWeek,agendaDay,listMonth'
           },
+          
           events:[]
         }; 
        this.getTasks();

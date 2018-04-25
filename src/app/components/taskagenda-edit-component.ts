@@ -41,7 +41,7 @@ export class TaskAgendaEditComponent implements OnInit{
         this.url=GLOBAL.url;
         this.is_edit=true;
         this.tasks=[];
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'');
+        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
         this.calendarOptions = {
             header: {
               left: 'prev,next today',
@@ -101,7 +101,7 @@ export class TaskAgendaEditComponent implements OnInit{
                             start:this.tasks[i].start,
                             end: this.tasks[i].end,
                             type:this.tasks[i].type,
-                            escription:this.tasks[i].description
+                            description:this.tasks[i].description
                         }
                         if(this.events[i].type=='liquida'){
                             this.events[i].color='#53B4BD'
@@ -133,7 +133,7 @@ export class TaskAgendaEditComponent implements OnInit{
                     }else{
                         this.alertUpdate='La tarea se ha actualizado correctamente';
                         this.task=response.task;
-                        this._router.navigate(['/game']);
+                        this._router.navigate(['/agenda']);
 
                     }
                 },

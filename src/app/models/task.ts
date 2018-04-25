@@ -10,6 +10,7 @@ export class Task{
         public duration:string,
         public type:string,
         public colocado:Boolean,
+        public color:string,
         public user:string
     ){}
 }

@@ -16,7 +16,7 @@ declare var fn:any;
 
 export class HomeComponent implements OnInit{
     public title:string;
-    events=null;
+    public tasks:Task[];
     public identity;
     constructor(
         private _route:ActivatedRoute,
@@ -36,14 +36,16 @@ export class HomeComponent implements OnInit{
     juego(){
         this.identity=this._userService.getIdentity();
         this.eventService.getEvents().subscribe(data => { 
-            this.events=data;
-            for(var i=0;i<this.events.length;i++){
-                     this.events[i].user=this.identity._id;
-                     this._taskService.addTask(this.events[i]).subscribe(
+            this.tasks=data;
+        })
+            for(var i=0;i<this.tasks.length;i++){
+                     this.tasks[i].user=this.identity._id;
+                     this._taskService.addTask(this.tasks[i]).subscribe(
                        response=>{
-                           if(!response.tasks){
-                           }else{ 
+                           if(!response.task){
                                console.log(response);
+                           }else{ 
+                               console.log(response.task);
                            }
                        },
                        error=>{
@@ -52,7 +54,10 @@ export class HomeComponent implements OnInit{
         
                    );
                    }
-        })
+            this._router.navigate(['/game']);
+                   
+        
+        
         
     }
 }

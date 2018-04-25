@@ -32,11 +32,12 @@
                     <select type="options" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required>
                         <option value="liquida">Liquida</option>
                         <option value="solida">Solida</option>
+                        
                     </select>
                   </p>
-        <p>
-                <input (click)="onSubmit()" class="btn btn-success" value="Actualizar"  />
-          </p>
+                  <P>
+                    <input  (click)="onSubmit()" class="btn btn-success" value="Actualizar"  />
+                  </P>
           <P>
             <input  (click)="onDeleteTask(task._id)" class="btn btn-danger" value="Eliminar"  />
           </P>

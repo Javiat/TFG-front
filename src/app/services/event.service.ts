@@ -11,17 +11,17 @@ export class EventService {
             start:null ,
             end:null,
             duration:'04:00',
-            type:'liquida',
+            type:'solida importante trabajo',
             user:''
         },
         {
             title: 'Reunicon JP Morgan',
             description:'Agenda Presidente',
             localizacion:'Londres',
-            start: null,
-            end:null,
+            start: '2018-04-25T13:00',
+            end:'2018-04-25T14:50',
             duration:'01:50',
-            type:'liquida',
+            type:'solida importante trabajo',
             user:''
         },
         {
@@ -31,37 +31,37 @@ export class EventService {
             start: null,
             end:null,
             duration:'01:50',
-            type:'liquida',
+            type:'liquida trabajo',
             user:''
         },
         {
             title: 'Reunicon Comité Ejecutivo',
             description:'Agenda Presidente',
             localizacion:'Madrid',
-            start: '2018-04-06T13:00:00Z',
-            end:'2018-04-06T17:00:00Z',
+            start: null,
+            end:null,
             duration:'04:00',
-            type:'liquida',
+            type:'liquida importante trabajo',
             user:''
         },
         {
             title: 'Entrevista H.Jordi Pujol',
             description:'Agenda Presidente',
             localizacion:'Barcelona',
-            start: '2018-04-05T13:00:00Z',
-            end:'2018-04-04T15:00:00Z',
+            start: '2018-04-05T13:00',
+            end:'2018-04-05T15:00',
             duration:'02:00',
-            type:'solida',
+            type:'solida trabajo',
             user:''
         },
         {
             title: 'Inauguración Museo de la Ciencia',
             description:'Agenda Presidente',
             localizacion:'Valencia',
-            start: '2018-04-02T15:30:00Z',
-            end:'2018-04-02T17:30:00Z',
+            start: '2018-04-02T15:30',
+            end:'2018-04-02T17:30',
             duration:'02:00',
-            type:'solida',
+            type:'solida trabajo',
             user:''
         },
         {
@@ -71,7 +71,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'04:00',
-            type:'liquida',
+            type:'solida importante trabajo',
             user:''
         },
         {
@@ -81,7 +81,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'liquida trabajo',
             user:''
         },
         {
@@ -91,7 +91,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'solida urgente trabajo',
             user:''
         },
         {
@@ -101,7 +101,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'03:00',
-            type:'liquida',
+            type:'liquida importante trabajo',
             user:''
         },
         {
@@ -111,7 +111,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'solida importante trabajo',
             user:''
         },
         {
@@ -121,7 +121,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'03:50',
-            type:'liquida',
+            type:'liquida trabajo',
             user:''
         },
         {
@@ -131,7 +131,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'liquida trabajo',
             user:''
         },
         {
@@ -141,7 +141,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'04:00',
-            type:'liquida',
+            type:'liquida urgente trabajo',
             user:''
         },
         {
@@ -151,7 +151,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'03:00',
-            type:'liquida',
+            type:'solida importante trabajo',
             user:''
         },
         {
@@ -161,7 +161,7 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'liquida trabajo',
             user:''
         },
         {
@@ -171,27 +171,47 @@ export class EventService {
             start: null,
             end:null,
             duration:'02:00',
-            type:'liquida',
+            type:'liquida urgente trabajo',
             user:''
         },
         {
             title: 'Presentación Libro Ministro',
             description:'Agenda Presidente',
             localizacion:'',
-            start: '2018-04-04T17:30:00Z',
-            end:'2018-04-04T20:30:00Z',
+            start: '2018-04-04T17:30',
+            end:'2018-04-04T20:30',
             duration:'03:00',
-            type:'solida',
+            type:'solida trabajo',
             user:''
         },
         {
             title: 'Lunch LBS Londres',
             description:'Agenda Presidente',
-            localizacion:'',
+            localizacion:'Londres',
             start: null,
             end:null,
             duration:'03:00',
-            type:'liquida',
+            type:'liquida trabajo',
+            user:''
+        },
+        {
+            title: 'Revision invitaciones Bautizo',
+            description:'Agenda Presidente',
+            localizacion:'',
+            start: null,
+            end:null,
+            duration:'04:00',
+            type:'liquida personal',
+            user:''
+        },
+        {
+            title: 'Bautizo',
+            description:'Agenda Presidente',
+            localizacion:'',
+            start: null,
+            end:null,
+            duration:'08:00',
+            type:'solida importante personal',
             user:''
         },
     ];

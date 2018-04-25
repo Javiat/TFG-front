@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {Component,OnInit,ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {GLOBAL} from '../services/global';
@@ -29,6 +29,7 @@ export class TaskGameEditComponent implements OnInit{
     public tasks:Task[];
     public events=[];
     displayEvent: any;
+    @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _route:ActivatedRoute,
         private _router:Router,
@@ -41,7 +42,14 @@ export class TaskGameEditComponent implements OnInit{
         this.url=GLOBAL.url;
         this.is_edit=true;
         this.tasks=[];
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'');
+        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
+       
+    }
+
+    ngOnInit(){
+        console.log('task-edit.component cargado');
+        this.getTask();
+        this.getTasks();
         this.calendarOptions = {
             header: {
               left: 'prev,next today',
@@ -50,16 +58,13 @@ export class TaskGameEditComponent implements OnInit{
           },
         editable: true,
         eventLimit: false,
-        events:this.events
-        
+        events:this.events,
+        businessHours: {
+            start: '09:00', // hora final
+            end: '21:00', // hora inicial
+            dow: [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo   
+          },
         };       
-    }
-
-    ngOnInit(){
-        console.log('task-edit.component cargado');
-        this.getTask();
-        this.getTasks();
-        console.log(this.calendarOptions);
                
     }
     getTask(){
@@ -101,13 +106,10 @@ export class TaskGameEditComponent implements OnInit{
                             start:this.tasks[i].start,
                             end: this.tasks[i].end,
                             type:this.tasks[i].type,
-                            escription:this.tasks[i].description
+                            description:this.tasks[i].description,
+                            color:this.tasks[i].color
                         }
-                        if(this.events[i].type=='liquida'){
-                            this.events[i].color='#53B4BD'
-                        }else{
-                            this.events[i].color='#C23E3D'
-                        }
+                        
                         }
                     
               }
@@ -133,7 +135,7 @@ export class TaskGameEditComponent implements OnInit{
                     }else{
                         this.alertUpdate='La tarea se ha actualizado correctamente';
                         this.task=response.task;
-                        this._router.navigate(['/game']);
+                       
 
                     }
                 },
@@ -147,6 +149,7 @@ export class TaskGameEditComponent implements OnInit{
 
             );
         });
+        this._router.navigate(['/game'])
     }
     onDeleteTask(id){
         this._taskService.deleteTask(id).subscribe(
@@ -154,7 +157,7 @@ export class TaskGameEditComponent implements OnInit{
                 if(!response.task){
                     this.alertUpdate='Error en el servidor';
                 }
-                this._router.navigate(['/agenda']);
+                this._router.navigate(['/game']);
             },
             error=>{
                 var errorMessage=<any>error;

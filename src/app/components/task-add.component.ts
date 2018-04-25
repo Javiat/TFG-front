@@ -34,7 +34,7 @@ export class TaskAddComponent implements OnInit{
     ){
         this.titulo='Crear una nueva tarea';
         this.identity=this._userService.getIdentity();
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'');
+        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
         this.calendarOptions = {
@@ -43,6 +43,7 @@ export class TaskAddComponent implements OnInit{
               center: 'title',
               right: 'month,agendaWeek,agendaDay,listMonth'
           },
+
         editable: true,
         eventLimit: false,
         events:this.events

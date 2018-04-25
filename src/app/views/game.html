@@ -2,44 +2,174 @@
     <div class="col-md-4">    
         <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
                 <h3>Tareas sin planificar</h3>
-                 
-                    <div  *ngFor="let task of tasks" class="col-md-6">
-                            <div class=" text-white bg-info " id="tasks" *ngIf="task.type=='liquida' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
-                                <div   class="card text-white bg-info">                                         
-                                    <div class="card-header">{{task.title}} {{task.localizacion}}</div>
-                                
-                                </div>
-                            </div>
-                        <div class=" card text-white bg-danger " id="tasks"  *ngIf="task.type=='solida' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
-                            <div  class=" card text-white bg-danger">
-                                <div class="card-header">{{task.title}} {{task.localizacion}}</div>
-                                <p>Fecha:{{task.start.slice(5,10)}}-2018</p>
-                            </div>
+              
+                <div  *ngFor="let task of tasks" class="col-md-6">
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #2E6368;border-color: #2E6368;" *ngIf="task.type=='liquida importante trabajo' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #2E6368;border-color: #2E6368;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                            
                         </div>
-                       
                     </div>
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #265256;border-color: #265256;" *ngIf="task.type=='liquida importante personal' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #265256;border-color: #265256;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                            
+                        </div>
+                    </div>
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #357379;border-color: #357379;" *ngIf="task.type=='liquida urgente trabajo' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #357379;border-color: #357379;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                          
+                        </div>
+                    </div>
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #3D838A;border-color: #3D838A;" *ngIf="task.type=='liquida urgente personal' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #3D838A;border-color: #3D838A;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                            
+                        </div>
+                    </div>
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #53B4BD;border-color: #53B4BD;" *ngIf="task.type=='liquida trabajo' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #53B4BD;border-color: #53B4BD;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                            
+                        </div>
+                    </div>
+                    <div class=" text-white bg-info " id="tasks" style="background-color: #62BAC3;border-color: #62BAC3;" *ngIf="task.type=='liquida personal' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                        <div   class="card text-white bg-info" style="background-color: #62BAC3;border-color: #62BAC3;">                                         
+                            <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                            
+                        </div>
+                    </div>
+                   
+                <div class=" card text-white bg-danger "  style="background-color: #C74F4E;border-color: #C74F4E;"id="tasks"  *ngIf="task.type=='solida trabajo' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                        
+                        
+                    </div>
+                </div>
+                <div class=" card text-white bg-danger " style="background-color: #591D1C;border-color: #591D1C;" id="tasks"  *ngIf="task.type=='solida importante trabajo' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger" style="background-color: #591D1C;border-color: #591D1C;">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                        
+                        
+                    </div>
+                </div>
+                <div class=" card text-white bg-danger " style="background-color: #6A2222;border-color: #6A2222;" id="tasks"  *ngIf="task.type=='solida importante personal' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger" style="background-color: #6A2222;border-color: #6A2222;">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                        
+                        
+                    </div>
+                </div>
+                <div class=" card text-white bg-danger " style="background-color: #8E2E2D;border-color: #8E2E2D;" id="tasks"  *ngIf="task.type=='solida urgente trabajo' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger" style="background-color: #8E2E2D;border-color: #8E2E2D;">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                       
+                   
+                    </div>
+                </div>
+                <div class=" card text-white bg-danger " style="background-color: #9F3332;border-color: #9F3332;" id="tasks"  *ngIf="task.type=='solida urgente personal' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger" style="background-color: #9F3332;border-color: #9F3332;">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                        
+                        
+                    </div>
+                </div>
+                <div class=" card text-white bg-danger " style="background-color: #CD6160;border-color: #CD6160;" id="tasks"  *ngIf="task.type=='solida  personal' && !task.colocado" [routerLink]="['/update-task/',task._id]" >
+                    <div  class=" card text-white bg-danger" style="background-color: #CD6160;border-color: #CD6160;">
+                        <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                       
+                        
+                    </div>
+                </div>
+            </div>
                 
         </div>
         <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
         
             <h3>Tareas planificadas</h3>
-                        <div  *ngFor="let task of tasks" class="col-md-6"  >
-                                <div class=" card text-white bg-danger " id="tasks"  *ngIf="task.type=='solida' && task.colocado" [routerLink]="['/update-task/',task._id]" >
-                                    <div  class=" card text-white bg-danger">
-                                        <div class="card-header">{{task.title}} {{task.localizacion}}</div>
-                                        <p>Fecha:{{task.start.slice(5,10)}}-2018</p>
-                                    </div>
+                        <div  *ngFor="let task of tasks" class="col-md-6">
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #1F4245;border-color: #1F4245;" *ngIf="task.type=='liquida importante trabajo' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #1F4245;border-color: #1F4245;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
                                 </div>
-                                <div class=" text-white bg-info" id="tasks" *ngIf="task.type=='liquida' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
-                                    <div   class="card text-white bg-info">                                        
-                                    <div class="card-header">{{task.title}} {{task.localizacion}}</div>
-                                    <p >Fecha:{{task.start.slice(5,10)}}-2018</p>
-                                    </div>
+                            </div>
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #265256;border-color: #265256;" *ngIf="task.type=='liquida importante personal' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #265256;border-color: #265256;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
                                 </div>
+                            </div>
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #357379;border-color: #357379;" *ngIf="task.type=='liquida urgente trabajo' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #357379;border-color: #357379;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                </div>
+                            </div>
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #3D838A;border-color: #3D838A;" *ngIf="task.type=='liquida urgente personal' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #3D838A;border-color: #3D838A;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                </div>
+                            </div>
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #53B4BD;border-color: #53B4BD;" *ngIf="task.type=='liquida trabajo' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #53B4BD;border-color: #53B4BD;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                </div>
+                            </div>
+                            <div class=" text-white bg-info " id="tasks" style="background-color: #62BAC3;border-color: #62BAC3;" *ngIf="task.type=='liquida personal' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
+                                <div   class="card text-white bg-info" style="background-color: #62BAC3;border-color: #62BAC3;">                                         
+                                    <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                    <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                </div>
+                            </div>
                            
-                           
+                        <div class=" card text-white bg-danger "  style="background-color: #C74F4E;border-color: #C74F4E;"id="tasks"  *ngIf="task.type=='solida trabajo' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p>Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                
+                            </div>
                         </div>
-                
+                        <div class=" card text-white bg-danger " style="background-color: #591D1C;border-color: #591D1C;" id="tasks"  *ngIf="task.type=='solida importante trabajo' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger" style="background-color: #591D1C;border-color: #591D1C;">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                
+                            </div>
+                        </div>
+                        <div class=" card text-white bg-danger " style="background-color: #6A2222;border-color: #6A2222;" id="tasks"  *ngIf="task.type=='solida importante personal' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger" style="background-color: #6A2222;border-color: #6A2222;">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                
+                            </div>
+                        </div>
+                        <div class=" card text-white bg-danger " style="background-color: #8E2E2D;border-color: #8E2E2D;" id="tasks"  *ngIf="task.type=='solida urgente trabajo' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger" style="background-color: #8E2E2D;border-color: #8E2E2D;">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                           
+                            </div>
+                        </div>
+                        <div class=" card text-white bg-danger " style="background-color: #9F3332;border-color: #9F3332;" id="tasks"  *ngIf="task.type=='solida urgente personal' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger" style="background-color: #9F3332;border-color: #9F3332;">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                
+                            </div>
+                        </div>
+                        <div class=" card text-white bg-danger " style="background-color: #CD6160;border-color: #CD6160;" id="tasks"  *ngIf="task.type=='solida  personal' && task.colocado" [routerLink]="['/update-task/',task._id]" >
+                            <div  class=" card text-white bg-danger" style="background-color: #CD6160;border-color: #CD6160;">
+                                <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
+                                <p *ngIf="task.start">Fecha:{{task.start.slice(5,10)}}-2018</p>
+                                
+                            </div>
+                        </div>
+                    </div>
         </div>
        
     </div>
