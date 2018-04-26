@@ -1,9 +1,9 @@
 <div *ngIf="identity" class="row">
-    <div class="col-md-4">    
+    <div class="col-md-5">    
         <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
                 <h3>Tareas sin planificar</h3>
               
-                <div  *ngFor="let task of tasks" class="col-md-6">
+                <div  *ngFor="let task of tasks" class="col-md-4">
                     <div class=" text-white bg-info " id="tasks" style="background-color: #2E6368;border-color: #2E6368;" *ngIf="task.type=='liquida importante trabajo' && !task.colocado"  [routerLink]="['/update-task/',task._id]" >
                         <div   class="card text-white bg-info" style="background-color: #2E6368;border-color: #2E6368;">                                         
                             <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
@@ -89,7 +89,7 @@
         <div  id="list-tasks"  class="col-md-12" *ngIf="tasks">
         
             <h3>Tareas planificadas</h3>
-                        <div  *ngFor="let task of tasks" class="col-md-6">
+                        <div  *ngFor="let task of tasks" class="col-md-4">
                             <div class=" text-white bg-info " id="tasks" style="background-color: #1F4245;border-color: #1F4245;" *ngIf="task.type=='liquida importante trabajo' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
                                 <div   class="card text-white bg-info" style="background-color: #1F4245;border-color: #1F4245;">                                         
                                     <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
