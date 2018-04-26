@@ -58,12 +58,13 @@ export class TaskGameEditComponent implements OnInit{
           },
         editable: true,
         eventLimit: false,
-        events:this.events,
+        events:[],
         businessHours: {
             start: '09:00', // hora final
             end: '21:00', // hora inicial
             dow: [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo   
           },
+        eventConstraint:"bussineshours"
         };       
                
     }
@@ -111,7 +112,6 @@ export class TaskGameEditComponent implements OnInit{
                         }
                         
                         }
-                    
               }
           },
           error=>{
@@ -135,7 +135,7 @@ export class TaskGameEditComponent implements OnInit{
                     }else{
                         this.alertUpdate='La tarea se ha actualizado correctamente';
                         this.task=response.task;
-                       
+                        this._router.navigate(['/game'])
 
                     }
                 },
@@ -149,7 +149,7 @@ export class TaskGameEditComponent implements OnInit{
 
             );
         });
-        this._router.navigate(['/game'])
+       
     }
     onDeleteTask(id){
         this._taskService.deleteTask(id).subscribe(

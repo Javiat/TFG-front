@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit{
         
                    );
                    }
-            this._router.navigate(['/game']);
+            
                    
         
         

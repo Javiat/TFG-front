@@ -41,6 +41,7 @@ export class GameComponent implements OnInit {
     calendar:FullCalendarModule;
     displayEvent: any;
     public events =[];
+    public events2 =[];
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _router:Router,
@@ -61,8 +62,7 @@ export class GameComponent implements OnInit {
     ngOnInit(){
         console.log('game.component.ts cargado');
         //Conseguir el listado de tareas 
-      
-       this.getTasks();
+        this.getTasks();
        this.calendarOptions = {
         header: {
           left: 'prev,next today',
@@ -70,16 +70,18 @@ export class GameComponent implements OnInit {
           right: 'month,agendaWeek,agendaDay,listMonth'
       },
       businessHours: {
-        
         start: '09:00', // hora final
         end: '21:00', // hora inicial
-        dow: [ 1, 2, 3, 4, 5 ], // dias de semana, 0=Domingo
-        
+        dow: [ 1, 2, 3, 4, 5 ],
+        // dias de semana, 0=Domingo
+      
       },
+      
       editable: true,
       eventLimit: false,
-      events:this.events,
-      eventConstraint: "businessHours"
+      eventConstraint: "businessHours",
+      
+      events:[]
       };
       
       }
@@ -118,12 +120,16 @@ export class GameComponent implements OnInit {
                       end: this.tasks[i].end,
                       type:this.tasks[i].type,
                       description:this.tasks[i].description,
-                      color:this.tasks[i].color
+                      color:this.tasks[i].color,
+                      
                     }
-                    
+                    var type=this.events[i].type;
+                   if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
+                      ||type=='solida urgente personal'){
+                      this.events[i].editable=false;
+                   }  
                   }
             }
-            console.log(this.tasks);
         },
         error=>{
             var errorMessage=<any>error;
@@ -168,7 +174,8 @@ export class GameComponent implements OnInit {
       }
       
       eventClick(model: any) {
-      
+        var type=model.event.type;
+       
         model = {
           event: {
             id: model.event.id,
@@ -180,19 +187,19 @@ export class GameComponent implements OnInit {
             // other params
           },
         }
+      
         this.displayEvent = model;
       }
       updateEvent(model: any) {
-        if(model.event.type=='solida'){
-          console.log('No se actualiza');
-        }else{
+        
           model = {
             event: {
               id: model.event.id,
               start: model.event.start,
               end: model.event.end,
               title: model.event.title,
-              type:model.event.type
+              type:model.event.type,
+              constraint:false
               // other params
             },
             duration: {
@@ -200,7 +207,6 @@ export class GameComponent implements OnInit {
             }
             
           }
-         
           this._taskService.updateEvent(model.event.id,model.event).subscribe(
             response=>{
                 if(!response.task){
@@ -219,8 +225,7 @@ export class GameComponent implements OnInit {
             }
   
         );
-        this.displayEvent = model; 
-        }
+         
       
         
        }

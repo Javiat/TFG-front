@@ -62,7 +62,8 @@ export class EventService {
             end:'2018-04-02T17:30',
             duration:'02:00',
             type:'solida trabajo',
-            user:''
+            user:'',
+            editable:false
         },
         {
             title: 'Reunicon Caixa ',
@@ -152,7 +153,8 @@ export class EventService {
             end:null,
             duration:'03:00',
             type:'solida importante trabajo',
-            user:''
+            user:'',
+           
         },
         {
             title: 'Entrevista Seleccion Consejeros',

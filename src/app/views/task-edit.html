@@ -17,7 +17,7 @@
                 </p>
                   <p>
                     <label>Fecha de inicio:</label>
-                    <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local" class="form-control" required/>
+                    <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local"  class="form-control" required/>
                   </p>
                   <p>
                     <label>Fecha de fin:</label>
@@ -29,11 +29,22 @@
                   </p>
                   <p>
                     <label>Tipo:</label>
-                    <select type="options" #type="ngModel" name="type" [(ngModel)]="task.type" class="form-control" required>
-                        <option value="liquida">Liquida</option>
-                        <option value="solida">Solida</option>
-                        
+                    <select type="options" #type="ngModel" name="type" [(ngModel)]="task.type" value="task.type" class="form-control" required>
+                    
+                        <option value="solida importante personal">solida importante personal</option>
+                        <option value="solida importante trabajo">solida importante trabajo</option>
+                        <option value="solida urgente personal">solida urgente personal</option>
+                        <option value="solida urgente trabajo">solida urgente trabajo</option>
+                        <option value="solida personal">solida personal</option>
+                        <option value="solida trabajo">solida trabajo</option>
+                        <option value="liquida importante personal">liquida importante personal</option>
+                        <option value="liquida importante trabajo">liquida importante trabajo</option>
+                        <option value="liquida urgente personal">liquida urgente personal</option>
+                        <option value="liquida urgente trabajo">liquida urgente trabajo</option>
+                        <option value="liquida personal">liquida personal</option>
+                        <option value="liquida trabajo">liquida trabajo</option>
                     </select>
+                    <!-- <input type="text" #title="ngModel" name="title" [(ngModel)]="task.title" class="form-control" required/> -->
                   </p>
                   <P>
                     <input  (click)="onSubmit()" class="btn btn-success" value="Actualizar"  />
