@@ -79,7 +79,7 @@ html,body{
     margin-top: 10px;
     border-radius: 9px;
     padding: 4px 17px;
-    height: 65px;
+    height: 75px;
     cursor: pointer;
     font-size: 12px;
 }
@@ -120,10 +120,15 @@ html,body{
     color: #F3F6FF;
     font-weight: bold;
 }
+.btn-nivel{
+    background-color: #F3F6FF;
+    color: #1C1C1F;
+    font-weight: bold;
+}
 .btn-index:hover{
     background-color: #53B4BD;
     color: #F3F6FF;
-    font-weight: bold;
+    
 }
 #logo{
     font-size: 60px;
@@ -134,6 +139,10 @@ html,body{
 .list-tareas{
     padding-top: 20px;
 }
+/* #list-tasks{
+    overflow: scroll;
+
+} */
 .btn-evaluar{
     background-color: #9ABE05;
     color: #F3F6FF;
@@ -157,4 +166,40 @@ html,body{
 }
 .fc-nonbusiness {
     background: red;
+}
+#nivel1{
+    background-color: #96E6B3;
+    border-radius: 17px;
+    padding: 10px;
+}
+#nivel2{
+    background-color: #D67D7C;
+    border-radius: 17px;
+    padding: 10px;
+}
+#nivel3{
+    background-color: #CD6160;
+    border-radius: 17px;
+    padding: 10px;
+}
+#agenda{
+    background-color: #D5FCD4;
+    border-radius: 17px;
+    padding: 10px;
+}
+#tareas_planificar{
+    cursor: pointer;
+    background-color: #9ABE05;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    color: #F3F6FF;
+}
+#tareas_planificadas{
+    cursor: pointer;
+    background-color: #9ABE05;
+    border-radius: 30px;
+    padding: 10px;
+    text-align: center;
+    color: #F3F6FF;
 }

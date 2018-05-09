@@ -1,4 +1,4 @@
-import {Component,OnInit,ViewChild} from '@angular/core';
+import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
 import {  OnChanges, SimpleChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { EventService } from '../services/event.service';
@@ -22,7 +22,7 @@ import 'jquery';
     providers:[UserService,TaskService,EventService]
 })
 
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit ,AfterViewInit {
     public title:string;
     public tasks:Task[];
     public tasks_planificadas=[];
@@ -52,37 +52,49 @@ export class GameComponent implements OnInit {
         private httpService: HttpClient      
     ){
         this.title='Listado de tareas';
-        this.task=new Task('','','','',null,null,'','',null,'','');
+        this.task=new Task('','','','',null,null,null,'',null,'','');
         this.identity=this._userService.getIdentity();
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
         
     }
-
+    ngAfterViewInit(){
+      console.log('prueba');
+      this.getTasks();
+    }
     ngOnInit(){
         console.log('game.component.ts cargado');
         //Conseguir el listado de tareas 
-        this.getTasks();
-       this.calendarOptions = {
-        header: {
-          left: 'prev,next today',
-          center: 'title',
-          right: 'month,agendaWeek,agendaDay,listMonth'
-      },
-      businessHours: {
-        start: '09:00', // hora final
-        end: '21:00', // hora inicial
-        dow: [ 1, 2, 3, 4, 5 ],
-        // dias de semana, 0=Domingo
+        $.getScript('../assets/js/script.js');
+        
+        this.calendarOptions = {
+         header: {
+           left: 'prev,next today',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay,listMonth'
+       },
+       events:[],
+       businessHours: {
+         start: '09:00', // hora final
+         end: '21:00', // hora inicial
+         dow: [ 1, 2, 3, 4, 5 ],
+         // dias de semana, 0=Domingo
+       
+       },
       
-      },
-      
-      editable: true,
-      eventLimit: false,
-      eventConstraint: "businessHours",
-      
-      events:[]
-      };
+       monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+       monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+       dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+       dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+       defaultDate:'2018-05-14',
+       editable: true,
+       eventLimit: false,
+       eventConstraint: "businessHours",
+       defaultView:'agendaWeek',
+       
+       firstDay:1
+       };
+       this.getTasks();
       
       }
    

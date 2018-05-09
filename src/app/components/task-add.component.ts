@@ -34,27 +34,31 @@ export class TaskAddComponent implements OnInit{
     ){
         this.titulo='Crear una nueva tarea';
         this.identity=this._userService.getIdentity();
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
+        this.task=new Task('','','','Agenda Personal',null,null,null,'',null,'','');
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
+              
+    }
+
+    ngOnInit(){
+        console.log('task-add.component cargado');
+        //Conseguir el listado de tareas
         this.calendarOptions = {
             header: {
               left: 'prev,next today',
               center: 'title',
               right: 'month,agendaWeek,agendaDay,listMonth'
           },
-
-        editable: true,
-        eventLimit: false,
-        events:this.events
-        
-        };       
-    }
-
-    ngOnInit(){
-        console.log('task-add.component cargado');
-        //Conseguir el listado de tareas
-        this.getTasks();
+          events:[],
+          
+          editable: true,
+          eventLimit: false,
+          
+          defaultView:'agendaWeek',
+          
+          firstDay:1
+          };
+          this.getTasks();
     }
     getTasks(){
         this._taskService.getTasks(this.id).subscribe(

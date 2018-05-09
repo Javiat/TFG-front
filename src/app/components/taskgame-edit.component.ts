@@ -42,31 +42,75 @@ export class TaskGameEditComponent implements OnInit{
         this.url=GLOBAL.url;
         this.is_edit=true;
         this.tasks=[];
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
+        this.task=new Task('','','','Agenda Personal',null,null,null,'',null,'','');
        
+         
     }
 
     ngOnInit(){
         console.log('task-edit.component cargado');
-        this.getTask();
-        this.getTasks();
         this.calendarOptions = {
             header: {
               left: 'prev,next today',
               center: 'title',
               right: 'month,agendaWeek,agendaDay,listMonth'
           },
-        editable: true,
-        eventLimit: false,
-        events:[],
-        businessHours: {
+          events:[],
+          businessHours: {
             start: '09:00', // hora final
             end: '21:00', // hora inicial
-            dow: [ 1, 2, 3, 4, 5 ] // dias de semana, 0=Domingo   
+            dow: [ 1, 2, 3, 4, 5 ],
+            // dias de semana, 0=Domingo
+          
           },
-        eventConstraint:"bussineshours"
-        };       
-               
+         
+          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+          monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+          dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+          dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+          defaultDate:'2018-05-14',
+          editable: true,
+          eventLimit: false,
+          eventConstraint: "businessHours",
+          defaultView:'agendaWeek',
+          
+          firstDay:1
+          };
+        this._taskService.getTasksGame(this.id).subscribe(
+            response=>{
+                if(!response.tasks){
+                    console.log('Este usuario no tiene tareas');  
+                }else{
+                    this.tasks=response.tasks;
+                    this.events.length=this.tasks.length;
+                    for(var i=0;i<this.tasks.length;i++){
+                        this.events[i]={
+                          id:this.tasks[i]._id,
+                          title: this.tasks[i].title,
+                          start:this.tasks[i].start,
+                          end: this.tasks[i].end,
+                          type:this.tasks[i].type,
+                          description:this.tasks[i].description,
+                          color:this.tasks[i].color,
+                          
+                        }
+                        var type=this.events[i].type;
+                       if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
+                          ||type=='solida urgente personal'){
+                          this.events[i].editable=false;
+                       }  
+                      }
+                }
+            },
+            error=>{
+                var errorMessage=<any>error;
+                if(errorMessage!=null){
+                  var body=JSON.parse(error._body);
+                 
+                }
+            }
+            )
+       this.getTask();     
     }
     getTask(){
         this._route.params.forEach((params:Params)=>{
@@ -110,7 +154,11 @@ export class TaskGameEditComponent implements OnInit{
                             description:this.tasks[i].description,
                             color:this.tasks[i].color
                         }
-                        
+                        var type=this.events[i].type;
+                        if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
+                           ||type=='solida urgente personal'){
+                           this.events[i].editable=false;
+                        }  
                         }
               }
           },
@@ -212,7 +260,7 @@ export class TaskGameEditComponent implements OnInit{
                   this.alertUpdate='Error en el servidor';
               }else{
                   console.log('La tarea se ha actualizado correctamente');
-                  this.getTasks();
+                  
               }
           },
           error=>{

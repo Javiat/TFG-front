@@ -41,7 +41,7 @@ export class TaskAgendaEditComponent implements OnInit{
         this.url=GLOBAL.url;
         this.is_edit=true;
         this.tasks=[];
-        this.task=new Task('','','','Agenda Personal',null,null,'','',null,'','');
+        this.task=new Task('','','','Agenda Personal',null,null,null,'',null,'','');
         this.calendarOptions = {
             header: {
               left: 'prev,next today',

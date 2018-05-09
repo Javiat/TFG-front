@@ -10,17 +10,17 @@ export class EventService {
             localizacion:'Bilbao',
             start:null ,
             end:null,
-            duration:'04:00',
-            type:'solida importante trabajo',
+            duration:4,
+            type:'liquida importante trabajo',
             user:''
         },
         {
             title: 'Reunicon JP Morgan',
             description:'Agenda Presidente',
             localizacion:'Londres',
-            start: '2018-04-25T13:00',
-            end:'2018-04-25T14:50',
-            duration:'01:50',
+            start: '2018-05-14T13:00',
+            end:'2018-05-14T14:50',
+            duration:1.50,
             type:'solida importante trabajo',
             user:''
         },
@@ -30,7 +30,7 @@ export class EventService {
             localizacion:'Londres',
             start: null,
             end:null,
-            duration:'01:50',
+            duration:2,
             type:'liquida trabajo',
             user:''
         },
@@ -40,7 +40,7 @@ export class EventService {
             localizacion:'Madrid',
             start: null,
             end:null,
-            duration:'04:00',
+            duration:4.00,
             type:'liquida importante trabajo',
             user:''
         },
@@ -48,9 +48,9 @@ export class EventService {
             title: 'Entrevista H.Jordi Pujol',
             description:'Agenda Presidente',
             localizacion:'Barcelona',
-            start: '2018-04-05T13:00',
-            end:'2018-04-05T15:00',
-            duration:'02:00',
+            start: '2018-05-15T13:00',
+            end:'2018-05-15T15:00',
+            duration:2.00,
             type:'solida trabajo',
             user:''
         },
@@ -58,9 +58,9 @@ export class EventService {
             title: 'Inauguración Museo de la Ciencia',
             description:'Agenda Presidente',
             localizacion:'Valencia',
-            start: '2018-04-02T15:30',
-            end:'2018-04-02T17:30',
-            duration:'02:00',
+            start: '2018-05-16T15:30',
+            end:'2018-05-16T17:30',
+            duration:2.00,
             type:'solida trabajo',
             user:'',
             editable:false
@@ -71,8 +71,8 @@ export class EventService {
             localizacion:'Barcelona',
             start: null,
             end:null,
-            duration:'04:00',
-            type:'solida importante trabajo',
+            duration:4.00,
+            type:'liquida importante trabajo',
             user:''
         },
         {
@@ -81,7 +81,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'02:00',
+            duration:2.00,
             type:'liquida trabajo',
             user:''
         },
@@ -91,8 +91,8 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'02:00',
-            type:'solida urgente trabajo',
+            duration:2.00,
+            type:'liquida urgente trabajo',
             user:''
         },
         {
@@ -101,7 +101,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'03:00',
+            duration:3.00,
             type:'liquida importante trabajo',
             user:''
         },
@@ -111,8 +111,8 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'02:00',
-            type:'solida importante trabajo',
+            duration:2.00,
+            type:'liquida importante trabajo',
             user:''
         },
         {
@@ -121,7 +121,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'03:50',
+            duration:4.00,
             type:'liquida trabajo',
             user:''
         },
@@ -131,28 +131,28 @@ export class EventService {
             localizacion:'Barna',
             start: null,
             end:null,
-            duration:'02:00',
+            duration:2.00,
             type:'liquida trabajo',
             user:''
         },
         {
-            title: 'Congreso Telecomunicaciones Portugal',
+            title: 'Congreso Teleco Portugal',
             description:'Agenda Presidente',
             localizacion:'Lisboa',
             start: null,
             end:null,
-            duration:'04:00',
+            duration:4.00,
             type:'liquida urgente trabajo',
             user:''
         },
         {
-            title: 'Reunion Comercial Patentes Talgo',
+            title: 'Reunion Patentes Talgo',
             description:'Agenda Presidente',
             localizacion:'',
             start: null,
             end:null,
-            duration:'03:00',
-            type:'solida importante trabajo',
+            duration:3.00,
+            type:'liquida importante trabajo',
             user:'',
            
         },
@@ -162,7 +162,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'02:00',
+            duration:2.00,
             type:'liquida trabajo',
             user:''
         },
@@ -172,7 +172,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'02:00',
+            duration:2.00,
             type:'liquida urgente trabajo',
             user:''
         },
@@ -180,9 +180,9 @@ export class EventService {
             title: 'Presentación Libro Ministro',
             description:'Agenda Presidente',
             localizacion:'',
-            start: '2018-04-04T17:30',
-            end:'2018-04-04T20:30',
-            duration:'03:00',
+            start: '2018-05-17T17:30',
+            end:'2018-05-04T17:30',
+            duration:3.00,
             type:'solida trabajo',
             user:''
         },
@@ -192,7 +192,7 @@ export class EventService {
             localizacion:'Londres',
             start: null,
             end:null,
-            duration:'03:00',
+            duration:3.00,
             type:'liquida trabajo',
             user:''
         },
@@ -202,7 +202,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'04:00',
+            duration:4.00,
             type:'liquida personal',
             user:''
         },
@@ -212,7 +212,7 @@ export class EventService {
             localizacion:'',
             start: null,
             end:null,
-            duration:'08:00',
+            duration:8.00,
             type:'solida importante personal',
             user:''
         },

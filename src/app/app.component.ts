@@ -39,6 +39,7 @@ export class AppComponent implements OnInit{
 
   ngOnInit(){
     this.identity=this._userService.getIdentity();
+    $.getScript('/assets/js/script.js');
   }
 
   public onSubmit(){
