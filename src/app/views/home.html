@@ -65,8 +65,18 @@
               <h2><i class="fas fa-gamepad icon-home"></i>  Nivel 3</h2>
                 <h4>¿Te crees capaz de realizar una planificación para una persona de alto cargo?</h4>
                 <p>Si tu respuesta es si, accede al siguiente nivel y demuestra tus habilidades.</p>
-                <a  class="btn btn-index" id="btn-cargar3" (click)="juego()"   [routerLinkActive]="['active']"  role="button">Cargar Nivel</a>
-                <a  class="btn btn-index" id="btn-juego3" style="display: none;" [routerLink]="['/game']"  [routerLinkActive]="['active']"  role="button">Jugar</a>
+                
+                <a  class="btn btn-index" id="btn-cargar3" [routerLink]="['/game']"  (click)="solucion_inicial()" [routerLinkActive]="['active']"   role="button">Solución inicial</a>
+                <a  class="btn btn-index" id="btn-juego3"  [routerLink]="['/game']"  (click)="caso_base()" [routerLinkActive]="['active']"  role="button">Caso Base</a>
+                <div  class="row" id="descripcion_solucion" style=" text-align: left;"> 
+                    <p>Caso práctico con 21 tareas a elegir entre opcion con solucion inicial o caso base.</p>
+                    <p>Los tonos rojos representan las tareas solidas, que no se pueden desplazar ni el día ni la hora.</p>
+                    <p>Los tonos azules representan las tareas líquidas, que se pueden desplazar el día y la hora.</p>
+                    <p>Hay que dejar como mínimo 30 minutos entre actividades.</p>
+                    <p>Tiempo de desplazamientos en avión:</p>
+                    <li>Península Ibérica a Londres y viceversa=12 horas</li>
+                    <li>Desplazamientos dentro de la Península ibérica=1 hora</li>
+                </div>
             </div>
           </div>
     

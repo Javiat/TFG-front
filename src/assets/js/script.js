@@ -19,13 +19,19 @@ $(document).ready(function() {
         $("#planificadas").hide();
         
     });
-    $("#btn-cargar3").click(function(){
-        setTimeout (prueba(), 5000); 
-       
-    });
-    function prueba(){
-        $("#btn-juego3").show(); 
-    }
-
-
+    // $("#btn-cargar3").hover(function(){
+    //     $("#descripcion_solucion").show();
+    // }, function(){
+    //     $("#descripcion_solucion").hide();
+    // });
+    // $("#btn-juego3").hover(function(){
+    //     $("#descripcion_base").show();
+    // }, function(){
+    //     $("#descripcion_base").hide();
+    // });
+    // function prueba(){
+    //     $("#btn-juego3").show(); 
+    // }
+   
+    
 });

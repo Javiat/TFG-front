@@ -1,4 +1,4 @@
-import {Component,OnInit,ViewChild} from '@angular/core';
+import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 
 import {GLOBAL} from '../services/global';
@@ -15,7 +15,7 @@ import { Options } from 'fullcalendar';
     providers:[UserService,TaskService]
 })
 
-export class TaskGameEditComponent implements OnInit{
+export class TaskGameEditComponent implements OnInit ,AfterViewInit{
     public titulo:string;
     public task:Task;
     public task_update:Task;
@@ -46,36 +46,7 @@ export class TaskGameEditComponent implements OnInit{
        
          
     }
-
-    ngOnInit(){
-        console.log('task-edit.component cargado');
-        this.calendarOptions = {
-            header: {
-              left: 'prev,next today',
-              center: 'title',
-              right: 'month,agendaWeek,agendaDay,listMonth'
-          },
-          events:[],
-          businessHours: {
-            start: '09:00', // hora final
-            end: '21:00', // hora inicial
-            dow: [ 1, 2, 3, 4, 5 ],
-            // dias de semana, 0=Domingo
-          
-          },
-         
-          monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-          monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-          dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-          dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-          defaultDate:'2018-05-14',
-          editable: true,
-          eventLimit: false,
-          eventConstraint: "businessHours",
-          defaultView:'agendaWeek',
-          
-          firstDay:1
-          };
+    ngAfterViewInit(){
         this._taskService.getTasksGame(this.id).subscribe(
             response=>{
                 if(!response.tasks){
@@ -110,6 +81,39 @@ export class TaskGameEditComponent implements OnInit{
                 }
             }
             )
+      }
+    ngOnInit(){
+        console.log('task-edit.component cargado');
+        this.calendarOptions = {
+            locale:'es',
+           header: {
+             left: 'prev,next',
+             center: 'title',
+             right: 'month,agendaWeek,agendaDay',
+             
+         },
+         
+         events:[],
+         businessHours: {
+           start: '09:00', // hora final
+           end: '21:00', // hora inicial
+           dow: [ 1, 2, 3, 4, 5 ],
+         },
+         buttonText: {
+          month:'Mes',
+          week:'Semana',
+          day:'Dia'
+         },
+  
+         editable: true,
+         eventLimit: false,
+         eventConstraint: "businessHours",
+         defaultView:'agendaWeek',
+         themeSystem: 'bootstrap3',
+         columnFormat:'dddd D' ,
+         firstDay:1,
+         allDaySlot:false
+         };
        this.getTask();     
     }
     getTask(){

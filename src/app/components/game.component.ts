@@ -25,9 +25,6 @@ import 'jquery';
 export class GameComponent implements OnInit ,AfterViewInit {
     public title:string;
     public tasks:Task[];
-    public tasks_planificadas=[];
-    public solidas:Task[];
-    public liquidas:Task[];
     public task:Task;
     public game:Task[];
     public identity;
@@ -41,7 +38,6 @@ export class GameComponent implements OnInit ,AfterViewInit {
     calendar:FullCalendarModule;
     displayEvent: any;
     public events =[];
-    public events2 =[];
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _router:Router,
@@ -59,8 +55,42 @@ export class GameComponent implements OnInit ,AfterViewInit {
         
     }
     ngAfterViewInit(){
-      console.log('prueba');
-      this.getTasks();
+      this._taskService.getTasksGame(this.id).subscribe(
+        response=>{
+            if(!response.tasks){
+                this.alertMessage='Este usuario no tiene tareas';  
+            }else{
+                this.tasks=response.tasks;
+                this.events.length=this.tasks.length;
+                for(var i=0;i<this.tasks.length;i++){
+                    this.events[i]={
+                      id:this.tasks[i]._id,
+                      title: this.tasks[i].title,
+                      start:this.tasks[i].start,
+                      end: this.tasks[i].end,
+                      type:this.tasks[i].type,
+                      description:this.tasks[i].description,
+                      color:this.tasks[i].color,
+                      
+                    }
+                    var type=this.events[i].type;
+                   if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
+                      ||type=='solida urgente personal'){
+                      this.events[i].editable=false;
+                   }  
+                  }
+            }
+        },
+        error=>{
+            var errorMessage=<any>error;
+            if(errorMessage!=null){
+              var body=JSON.parse(error._body);
+              this.alertMessage=body.message;
+            }
+        }
+        )
+         
+     
     }
     ngOnInit(){
         console.log('game.component.ts cargado');
@@ -68,34 +98,36 @@ export class GameComponent implements OnInit ,AfterViewInit {
         $.getScript('../assets/js/script.js');
         
         this.calendarOptions = {
+          locale:'es',
          header: {
-           left: 'prev,next today',
+           left: 'prev,next',
            center: 'title',
-           right: 'month,agendaWeek,agendaDay,listMonth'
+           right: 'month,agendaWeek,agendaDay',
+           
        },
+       
        events:[],
        businessHours: {
          start: '09:00', // hora final
          end: '21:00', // hora inicial
          dow: [ 1, 2, 3, 4, 5 ],
-         // dias de semana, 0=Domingo
-       
        },
-      
-       monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
-       monthNamesShort: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
-       dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-       dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
-       defaultDate:'2018-05-14',
+       buttonText: {
+        month:'Mes',
+        week:'Semana',
+        day:'Dia'
+       },
+
        editable: true,
        eventLimit: false,
        eventConstraint: "businessHours",
        defaultView:'agendaWeek',
-       
-       firstDay:1
+       themeSystem: 'bootstrap3',
+       columnFormat:'dddd D' ,
+       firstDay:1,
+       allDaySlot:false
        };
-       this.getTasks();
-      
+       
       }
    
   //  solucion_inicial(){ 
@@ -162,7 +194,8 @@ export class GameComponent implements OnInit ,AfterViewInit {
               if(!response.task){
                   this.alertMessage='Error en el servidor';
               }else{ 
-                console.log(response.task);      
+                console.log(response.task);
+                this.tasks=response.tasks;      
               }
              
           },
@@ -175,7 +208,8 @@ export class GameComponent implements OnInit ,AfterViewInit {
           }
       )
       }
-      this._router.navigate(['/']);     
+      this._router.navigate(['/home']);
+         
       }
 
       clickButton(model: Task) {

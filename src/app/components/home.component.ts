@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit{
     ngOnInit(){
         console.log('home.component.ts cargado');
         $.getScript('../assets/js/script.js'); 
-        //Conseguir el listado de tareas
+        
     }
 
-    juego(){
-        var tasks=[];
+    solucion_inicial(){
+       
         this.identity=this._userService.getIdentity();
         this._taskService.getTaskJuego(this.identity._id).subscribe(
             response=>{
@@ -44,13 +44,16 @@ export class HomeComponent implements OnInit{
                     console.log(response);
                 }else{ 
                     console.log(response);
+                    
                 }
                 },
                 error=>{
                     console.log('Error');
                 }
+                
         );
-        
+        this._router.navigate(['/game']);
+    }   
         // var horas=12;
         // var f = new Date();
         // var day=14;
@@ -105,5 +108,22 @@ export class HomeComponent implements OnInit{
         
         //            );
         //            } 
-    }
+        caso_base(){
+            this.identity=this._userService.getIdentity();
+            this._taskService.caso_base(this.identity._id).subscribe(
+                response=>{
+                    if(!response){
+                        console.log(response);
+                    }else{ 
+                        console.log(response);
+                       
+                    }
+                    },
+                    error=>{
+                        console.log('Error');
+                    }
+                    
+            );
+            this._router.navigate(['/game']);
+        }   
 }

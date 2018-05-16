@@ -59,6 +59,15 @@ export class TaskService{
                          .map(res=>res.json());
 }
 
+    caso_base(userId){
+    let headers=new Headers({
+         'Content-Type':'application/json'
+    });
+    let options=new RequestOptions({headers:headers});
+    return this._http.get(this.url+'caso-base/'+userId,options)
+                         .map(res=>res.json());
+    }
+
    addTask(task:Task){
         let params=JSON.stringify(task);
         let headers=new Headers({

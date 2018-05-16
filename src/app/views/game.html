@@ -193,12 +193,12 @@
         <div class="row list-tareas">
                 <div class="col-md-2" style="text-align:left;">
                     
-                        <a  class="btn btn-evaluar" (click)="onDeleteTask()">
-                                Evaluar
-                        </a> 
+                       
                 </div>
-                <div class="col-md-10" >
-                    <p>Display event : {{displayEvent | json}}</p>
+                <div class="col-md-10" style="text-align: right;">
+                    <a  class="btn btn-evaluar" (click)="onDeleteTask()"  >
+                        Evaluar
+                </a> 
                 </div>
 
         </div>
@@ -210,3 +210,4 @@
         </div>
     </div>
 </div>
+
