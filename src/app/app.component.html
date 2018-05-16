@@ -10,9 +10,13 @@
       <div class="user-image" >
           <img id="image-logged"  src="{{url + 'get-image-user/' + identity.image}}"/>
       </div>
+      
       <span id="identity_name">
         {{identity.name}}
-      </span> 
+      </span>
+      <div >
+        Partidas: <p id="partidas">{{identity.partidas}}</p>
+      </div> 
       <a [routerLink]="['/mis-datos']" [routerLinkActive]="['active']">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         Mis datos

@@ -50,6 +50,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
         this.title='Listado de tareas';
         this.task=new Task('','','','',null,null,null,'',null,'','');
         this.identity=this._userService.getIdentity();
+        this.user=this.identity;
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
         
@@ -129,25 +130,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
        };
        
       }
-   
-  //  solucion_inicial(){ 
-  //   this.events=[this.tasks.length];
-  //     for(var i=0;i<this.tasks.length;i++){
-  //         this.events[i]={
-  //           id:this.tasks[i]._id,
-  //           title: this.tasks[i].title,
-  //           start:this.tasks[i].start,
-  //           end: this.tasks[i].end,
-  //           type:this.tasks[i].type,
-  //           escription:this.tasks[i].description
-  //         }
-  //         if(this.events[i].type=='liquida'){
-  //           this.events[i].color='#53B4BD'
-  //         }else{
-  //           this.events[i].color='#C23E3D'
-  //         }
-  //       }
-  //  }   
+ 
     getTasks(){
       this._taskService.getTasksGame(this.id).subscribe(
         response=>{
@@ -164,8 +147,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
                       end: this.tasks[i].end,
                       type:this.tasks[i].type,
                       description:this.tasks[i].description,
-                      color:this.tasks[i].color,
-                      
+                      color:this.tasks[i].color,      
                     }
                     var type=this.events[i].type;
                    if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
@@ -208,6 +190,22 @@ export class GameComponent implements OnInit ,AfterViewInit {
           }
       )
       }
+      this._userService.updatePartidas(this.identity).subscribe(
+        response=>{
+          if(!response.user){
+            this.alertMessage="Erroe en el servidor";
+          }else{
+            this.user=response.user;
+            document.getElementById("partidas").innerHTML=JSON.stringify(this.user.partidas);
+          }
+        },error=>{
+          var errorMessage=<any>error;
+          if(errorMessage!=null){
+            var body=JSON.parse(error._body);
+            this.alertMessage=body.message;
+          }
+        }
+      )
       this._router.navigate(['/home']);
          
       }
@@ -271,99 +269,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
             }
   
         );
-         
-      
         
        }
-        // leerArchivo(fileInput:any){
-    //   var archivo = fileInput.target.files[0];
-    //   if (!archivo) {
-    //     return;
-    //   }
-    //   var lector = new FileReader();
-    //   var contenido;
-    //   lector.onload = function(archivo) {
-    //     contenido = archivo.target;
-        
-    //   };
 
-    //   lector.readAsText(archivo);
-      
-    // }
-      // loadJson() {
-      //    this.eventService.getEvents().subscribe(data => {
-      //      this.events2=data;
-      //    });
-      //    console.log('Json original');
-      //    console.log(this.events2);
-      
-      //   }
-      //  addTasks(events:any[]){
-      //     for(var i=0;i<events.length;i++){
-      //       events[i].user=this.id;
-      //       this._taskService.addTask(events[i]).subscribe(
-      //         response=>{
-      //             if(!response.tasks){
-      //                 this.alertMessage='Error en el servidor';
-      //             }else{
-      //                 this.alertMessage='La tarea se ha creado correctamente';
-      //                 this.tasks=response.tasks;
-      //                 console.log(this.tasks);
-      //             }
-      //         },
-      //         error=>{
-      //             var errorMessage=<any>error;
-      //             if(errorMessage!=null){
-      //               var body=JSON.parse(error._body);
-      //               this.alertMessage=body.message;
-      //             }
-      //         }
-
-      //     );
-      //     }
-      // }
-      // loadBBDD() {
-      //   this.getTasks();
-      // }
-     
-      
-    // subirJson(fileInput:any){
-    //   this.filesToUpload=<Array<File>>fileInput.target.files;
-    //   console.log(this.filesToUpload);
-    //   this.makeFileRequest(this.url+'upload-game/',[],this.filesToUpload)
-    //   .then(
-    //       (result:any)=>{
-    //           console.log('json subido');
-              
-    //       }
-    //   );
-    //   // this._taskService.getFile('91fdtWqYwJhOWqFGvLFK6kKz.json').subscribe(
-    //   //   response=>{
-    //   //     console.log(response);
-    //   //   },
-    //   //   error=>{
-
-    //   //   }
-    //   // )                        
-    // }
-    // makeFileRequest(url:string,params:Array<string>,files:Array<File>){
-    //   return new Promise(function(resolve,reject){
-    //     var formData:any=new FormData();
-    //     var xhr=new XMLHttpRequest();
-    //     for(var i=0;i<files.length;i++){
-    //       formData.append('file',files[i],files[i].name);
-    //     }
-    //     xhr.onreadystatechange=function(){
-    //       if(xhr.readyState==4){
-    //         if(xhr.status==200){
-    //           resolve(JSON.parse(xhr.response));
-    //         }else{
-    //           reject(xhr.response);
-    //         }
-    //     }
-    //   }
-    //   xhr.open('POST',url,true);
-    //   xhr.send(formData);
-    //   });
-    // }
 }

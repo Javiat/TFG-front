@@ -36,21 +36,18 @@ export class HomeComponent implements OnInit{
     }
 
     solucion_inicial(){
-       
         this.identity=this._userService.getIdentity();
         this._taskService.getTaskJuego(this.identity._id).subscribe(
             response=>{
                 if(!response){
                     console.log(response);
                 }else{ 
-                    console.log(response);
-                    
+                    console.log(response);   
                 }
                 },
                 error=>{
                     console.log('Error');
                 }
-                
         );
         this._router.navigate(['/game']);
     }   

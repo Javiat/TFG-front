@@ -32,8 +32,8 @@ export class AppComponent implements OnInit{
     private eventService:EventService,
     private _taskService:TaskService
   ){
-    this.user=new User('','','','','','');
-    this.user_register=new User('','','','','','');
+    this.user=new User('','','','','',0,'');
+    this.user_register=new User('','','','','',0,'');
     this.url=GLOBAL.url;
   }
 
@@ -54,8 +54,8 @@ export class AppComponent implements OnInit{
          }else{
           //Crear elemento en el localstorage 
           localStorage.setItem('identity',JSON.stringify(identity));
-          this.user=new User('','','','','','');
-          this.user_register=new User('','','','','','');
+          this.user=new User('','','','','',0,'');
+          this.user_register=new User('','','','','',0,'');
            //Conseguir el token para enviarselo a cada peticion
          }
       },
@@ -84,7 +84,7 @@ export class AppComponent implements OnInit{
           this.alertRegister='Error al registrarse';
         }else{
           this.alertRegister='El registro se ha realizado correctamente,identificate con'+ this.user_register.email;
-          this.user_register=new User('','','','','','');
+          this.user_register=new User('','','','','',0,'');
         }
       },
       error=>{
