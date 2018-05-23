@@ -212,3 +212,7 @@ html,body{
 .fc-today{
     background-color: #F3F6FF;
 }
+#reloj{
+    font-size: 20px;
+    font-weight: bold;
+}

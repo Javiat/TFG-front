@@ -49,62 +49,10 @@ export class HomeComponent implements OnInit{
                     console.log('Error');
                 }
         );
-        this._router.navigate(['/game']);
-    }   
-        // var horas=12;
-        // var f = new Date();
-        // var day=14;
-        // var month=(f.getMonth() +1);
-        // var hora_inicio;
-        //     for(var i=0;i<this.tasks.length;i++){    
-        //              this.tasks[i].user=this.identity._id;
-        //              if(this.tasks[i].start==null && this.tasks[i].end==null){ 
-        //                 if(this.tasks[i].duration<=horas){
-        //                     if(i==0){
-        //                         hora_inicio=9;
-        //                         var fecha=f.getFullYear() + "-0" + month + "-" + day+"T0"+hora_inicio;
-        //                         this.tasks[i].start=fecha;
-        //                         hora_inicio+=this.tasks[i].duration;
-        //                         var fecha=f.getFullYear() + "-0" + month + "-"  +day+"T"+hora_inicio;
-        //                         this.tasks[i].end=fecha;
-        //                         horas=horas-this.tasks[i].duration;
-        //                     }else{
-        //                         var fecha=f.getFullYear() + "-0" + month + "-" + day+"T"+hora_inicio;
-        //                         this.tasks[i].start=fecha;
-        //                         hora_inicio+=this.tasks[i].duration;
-        //                         var fecha=f.getFullYear() + "-0" + month + "-" + day+"T"+hora_inicio;
-        //                         this.tasks[i].end=fecha;
-        //                         horas=horas-this.tasks[i].duration;
-        //                     }
-                            
-        //                 }else{
-        //                    horas=12;
-        //                    hora_inicio=9;
-        //                    day=(day+1);
-        //                    var month=(f.getMonth() +1); 
-        //                    var fecha=f.getFullYear() + "-0" + month + "-" +day+"T0"+hora_inicio;
-        //                     this.tasks[i].start=fecha;
-        //                     hora_inicio+=this.tasks[i].duration;
-        //                     var fecha=f.getFullYear() + "-0" + month + "-" +day+"T"+hora_inicio;
-        //                     this.tasks[i].end=fecha;
-        //                     horas=horas-this.tasks[i].duration;
-        //                 }
-                       
-        //              }
-        //              this._taskService.addTask(this.tasks[i]).subscribe(
-        //                response=>{
-        //                    if(!response.task){
-        //                        console.log(response);
-        //                    }else{ 
-        //                        console.log(response.task);
-        //                    }
-        //                },
-        //                error=>{
-        //                    console.log('Error');
-        //               }
         
-        //            );
-        //            } 
+        window.location.href = '/game';
+    }   
+       
         caso_base(){
             this.identity=this._userService.getIdentity();
             this._taskService.caso_base(this.identity._id).subscribe(
@@ -121,6 +69,6 @@ export class HomeComponent implements OnInit{
                     }
                     
             );
-            this._router.navigate(['/game']);
+            window.location.href = '/game';
         }   
 }

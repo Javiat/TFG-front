@@ -11,6 +11,7 @@ import {TaskAddComponent} from './components/task-add.component';
 import {TaskGameEditComponent} from './components/taskgame-edit.component';
 import {TaskAgendaEditComponent} from './components/taskagenda-edit-component';
 import{AgendaComponent} from './components/agenda.component';
+import{TimerComponent} from './components/timer';
 import { FullCalendarModule } from 'ng-fullcalendar';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     TaskAddComponent,
     TaskGameEditComponent,
     AgendaComponent,
-    TaskAgendaEditComponent
+    TaskAgendaEditComponent,
+    TimerComponent
 
   ],
   imports: [

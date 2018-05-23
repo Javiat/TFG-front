@@ -32,6 +32,5 @@ $(document).ready(function() {
     // function prueba(){
     //     $("#btn-juego3").show(); 
     // }
-   
     
 });

@@ -1,4 +1,4 @@
-import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
+import {Component,OnInit,ViewChild,AfterViewInit,Input} from '@angular/core';
 import {  OnChanges, SimpleChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { EventService } from '../services/event.service';
@@ -15,7 +15,7 @@ import { DragDropDirectiveModule} from "angular4-drag-drop";
 import { Options } from 'fullcalendar';
 import * as $ from 'jquery';
 import 'jquery';
-
+var moment=require('moment');
 @Component({
     selector:'game',
     templateUrl:'../views/game.html',
@@ -26,7 +26,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
     public title:string;
     public tasks:Task[];
     public task:Task;
-    public game:Task[];
+    public game=[];
     public identity;
     public url:String;
     public id;
@@ -38,6 +38,9 @@ export class GameComponent implements OnInit ,AfterViewInit {
     calendar:FullCalendarModule;
     displayEvent: any;
     public events =[];
+    public minutes: number;
+    public seconds: number;
+
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _router:Router,
@@ -56,46 +59,13 @@ export class GameComponent implements OnInit ,AfterViewInit {
         
     }
     ngAfterViewInit(){
-      this._taskService.getTasksGame(this.id).subscribe(
-        response=>{
-            if(!response.tasks){
-                this.alertMessage='Este usuario no tiene tareas';  
-            }else{
-                this.tasks=response.tasks;
-                this.events.length=this.tasks.length;
-                for(var i=0;i<this.tasks.length;i++){
-                    this.events[i]={
-                      id:this.tasks[i]._id,
-                      title: this.tasks[i].title,
-                      start:this.tasks[i].start,
-                      end: this.tasks[i].end,
-                      type:this.tasks[i].type,
-                      description:this.tasks[i].description,
-                      color:this.tasks[i].color,
-                      
-                    }
-                    var type=this.events[i].type;
-                   if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
-                      ||type=='solida urgente personal'){
-                      this.events[i].editable=false;
-                   }  
-                  }
-            }
-        },
-        error=>{
-            var errorMessage=<any>error;
-            if(errorMessage!=null){
-              var body=JSON.parse(error._body);
-              this.alertMessage=body.message;
-            }
-        }
-        )
-         
+     this.getTasks();
+     
      
     }
     ngOnInit(){
         console.log('game.component.ts cargado');
-        //Conseguir el listado de tareas 
+        
         $.getScript('../assets/js/script.js');
         
         this.calendarOptions = {
@@ -128,9 +98,29 @@ export class GameComponent implements OnInit ,AfterViewInit {
        firstDay:1,
        allDaySlot:false
        };
-       
+
+       this.resetTimer();
+        setInterval(() => this.tick(), 1000);
       }
- 
+    
+
+    
+  resetTimer(): void {
+    this.minutes = 24;
+    this.seconds = 59;
+   
+  }
+
+  private tick(): void {
+      if (--this.seconds < 0) {
+        this.seconds = 59;
+        if (--this.minutes < 0) {
+          this.minutes=0;
+          this.seconds=0;
+        }  
+    }
+  }
+
     getTasks(){
       this._taskService.getTasksGame(this.id).subscribe(
         response=>{
@@ -138,7 +128,9 @@ export class GameComponent implements OnInit ,AfterViewInit {
                 this.alertMessage='Este usuario no tiene tareas';  
             }else{
                 this.tasks=response.tasks;
+                
                 this.events.length=this.tasks.length;
+                
                 for(var i=0;i<this.tasks.length;i++){
                     this.events[i]={
                       id:this.tasks[i]._id,
@@ -165,7 +157,37 @@ export class GameComponent implements OnInit ,AfterViewInit {
             }
         }
         )
-         
+    }
+
+    evaluar(){
+        var veces=1;
+        var f=new Date();
+        var diapararestar=f.getUTCDay();
+        if(diapararestar==0){
+           var dias1=(-6);        
+        }else{
+           var dias1=(diapararestar-1)*(-1);        
+        }
+        f.setDate(f.getDate() + dias1);
+        var contador=0;
+        this.compararFechas(f,veces,contador);
+        this.onDeleteTask();
+    }
+  
+
+    compararFechas(f,veces,contador){ 
+      for(var i=0;i<this.tasks.length;i++){
+        if(f.getDay()==moment(this.tasks[i].start).day()){
+          this.game[contador]=this.tasks[i];
+          contador++;
+        }
+      }
+      f.setDate(f.getDate()+1);
+      veces+=1;
+      if(veces<7){
+        this.compararFechas(f,veces,contador);
+      }
+      
     }
     onDeleteTask(){
       for(var i=0;i<this.events.length;i++){
@@ -193,9 +215,10 @@ export class GameComponent implements OnInit ,AfterViewInit {
       this._userService.updatePartidas(this.identity).subscribe(
         response=>{
           if(!response.user){
-            this.alertMessage="Erroe en el servidor";
+            this.alertMessage="Error en el servidor";
           }else{
             this.user=response.user;
+            console.log(this.user);
             document.getElementById("partidas").innerHTML=JSON.stringify(this.user.partidas);
           }
         },error=>{
@@ -206,7 +229,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
           }
         }
       )
-      this._router.navigate(['/home']);
+      
          
       }
 
@@ -271,5 +294,4 @@ export class GameComponent implements OnInit ,AfterViewInit {
         );
         
        }
-
 }

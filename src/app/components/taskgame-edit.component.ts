@@ -1,6 +1,5 @@
-import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
+import {Component,OnInit,ViewChild,AfterViewInit,Input} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-
 import {GLOBAL} from '../services/global';
 import {UserService} from '../services/user.service';
 import {TaskService} from '../services/task.service';
@@ -29,6 +28,8 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
     public tasks:Task[];
     public events=[];
     displayEvent: any;
+    @Input()  minutes: number;
+    @Input()  seconds: number;
     @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
     constructor(
         private _route:ActivatedRoute,
@@ -116,6 +117,7 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
          };
        this.getTask();     
     }
+    
     getTask(){
         this._route.params.forEach((params:Params)=>{
             let id=params['id'];
