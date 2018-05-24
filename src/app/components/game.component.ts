@@ -24,7 +24,7 @@ var moment=require('moment');
 
 export class GameComponent implements OnInit ,AfterViewInit {
     public title:string;
-    public tasks:Task[];
+    public tasks=[];
     public task:Task;
     public game=[];
     public identity;
@@ -59,9 +59,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
         
     }
     ngAfterViewInit(){
-     this.getTasks();
-     
-     
+     this.getTasks(); 
     }
     ngOnInit(){
         console.log('game.component.ts cargado');
@@ -170,24 +168,54 @@ export class GameComponent implements OnInit ,AfterViewInit {
         }
         f.setDate(f.getDate() + dias1);
         var contador=0;
-        this.compararFechas(f,veces,contador);
+        //this.compararFechas(f,veces,contador);
+        this.actualizarPartidas();
+        this.tasks.sort(function(a,b){
+          return a.start.localeCompare(b.start);
+        });
+        console.log(this.tasks);
         this.onDeleteTask();
     }
   
 
-    compararFechas(f,veces,contador){ 
+    compararFechas(f,veces,contador){
+      var prueba=[];
       for(var i=0;i<this.tasks.length;i++){
         if(f.getDay()==moment(this.tasks[i].start).day()){
+          
           this.game[contador]=this.tasks[i];
           contador++;
+         
         }
       }
+      
       f.setDate(f.getDate()+1);
       veces+=1;
       if(veces<7){
         this.compararFechas(f,veces,contador);
       }
       
+    }
+    actualizarPartidas(){
+      this._userService.updatePartidas(this.identity).subscribe(
+        response=>{
+          if(!response){
+            this.alertMessage="Error en el servidor";
+          }else{
+            
+            this.user=response.userUpdated;
+            localStorage.setItem('identity',JSON.stringify(this.user));
+            document.getElementById("partidas").innerHTML=JSON.stringify(this.user.partidas);
+            
+          }
+        },error=>{
+          var errorMessage=<any>error;
+          if(errorMessage!=null){
+            var body=JSON.parse(error._body);
+            this.alertMessage=body.message;
+          }
+        }
+      )
     }
     onDeleteTask(){
       for(var i=0;i<this.events.length;i++){
@@ -212,23 +240,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
           }
       )
       }
-      this._userService.updatePartidas(this.identity).subscribe(
-        response=>{
-          if(!response.user){
-            this.alertMessage="Error en el servidor";
-          }else{
-            this.user=response.user;
-            console.log(this.user);
-            document.getElementById("partidas").innerHTML=JSON.stringify(this.user.partidas);
-          }
-        },error=>{
-          var errorMessage=<any>error;
-          if(errorMessage!=null){
-            var body=JSON.parse(error._body);
-            this.alertMessage=body.message;
-          }
-        }
-      )
+     
       
          
       }
