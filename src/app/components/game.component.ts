@@ -67,7 +67,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
         $.getScript('../assets/js/script.js');
         
         this.calendarOptions = {
-          locale:'es',
+        locale:'es',
          header: {
            left: 'prev,next',
            center: 'title',
@@ -158,6 +158,7 @@ export class GameComponent implements OnInit ,AfterViewInit {
     }
 
     evaluar(){
+        
         var veces=1;
         var f=new Date();
         var diapararestar=f.getUTCDay();
@@ -168,33 +169,38 @@ export class GameComponent implements OnInit ,AfterViewInit {
         }
         f.setDate(f.getDate() + dias1);
         var contador=0;
-        //this.compararFechas(f,veces,contador);
         this.actualizarPartidas();
-        this.tasks.sort(function(a,b){
-          return a.start.localeCompare(b.start);
-        });
         console.log(this.tasks);
+        for(var i=0;i<this.tasks.length-1;i++){
+          if(this.tasks[i].end!=null && this.tasks[i+1].start!=null){
+            this.tasks.sort(function(a,b){
+              return a.start.localeCompare(b.start);
+            });
+          }
+        }
+        
+        
+        console.log('Tiempo: '+this.minutes+":"+this.seconds);
+        this.minutes=0;
+        this.seconds=0;
+        this.compararFechas();
         this.onDeleteTask();
     }
   
-
-    compararFechas(f,veces,contador){
-      var prueba=[];
-      for(var i=0;i<this.tasks.length;i++){
-        if(f.getDay()==moment(this.tasks[i].start).day()){
-          
-          this.game[contador]=this.tasks[i];
-          contador++;
-         
+    compararFechas(){
+      for(var i=0;i<this.tasks.length-1;i++){ 
+          var fecha_inicio = moment(this.tasks[i].end);
+          var fecha_fin = moment(this.tasks[i+1].start);
+          var totalHours = fecha_fin.diff(fecha_inicio, 'hours');
+          var totalMinutes = fecha_fin.diff(fecha_inicio, 'minutes');
+          var clearMinutes = totalMinutes % 60;
+          console.log('Diferencia entre:'+this.tasks[i].title+" y "+this.tasks[i+1].title+" es: "+totalHours + " hours and " + clearMinutes + " minutes");
+          if(totalMinutes<30){
+            console.log('tarea mal planificada');
+          }else{
+            console.log('bien planificada');
+          }
         }
-      }
-      
-      f.setDate(f.getDate()+1);
-      veces+=1;
-      if(veces<7){
-        this.compararFechas(f,veces,contador);
-      }
-      
     }
     actualizarPartidas(){
       this._userService.updatePartidas(this.identity).subscribe(

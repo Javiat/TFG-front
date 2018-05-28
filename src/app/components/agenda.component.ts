@@ -47,16 +47,28 @@ export class AgendaComponent implements OnInit{
         console.log('game.component.ts cargado');
         //Conseguir el listado de tareas
         this.calendarOptions = {
-          editable: true,
-          eventLimit: false,
-          header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay,listMonth'
-          },
-          
-          events:[]
-        }; 
+        locale:'es',
+         header: {
+           left: 'prev,next',
+           center: 'title',
+           right: 'month,agendaWeek,agendaDay',    
+       },
+       
+       events:[],
+       buttonText: {
+        month:'Mes',
+        week:'Semana',
+        day:'Dia'
+       },
+       editable: true,
+       eventLimit: false,
+       defaultView:'agendaWeek',
+       themeSystem: 'bootstrap3',
+       columnFormat:'dddd D' ,
+       firstDay:1,
+       allDaySlot:false
+       };
+
        this.getTasks();
     }
 

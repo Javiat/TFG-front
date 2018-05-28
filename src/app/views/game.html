@@ -1,6 +1,6 @@
 <div *ngIf="identity" class="row">
     <div class="col-md-5">    
-        <div    class="col-md-12" >
+        <div  class="col-md-12" >
                 <h3 id="tareas_planificar" >Tareas sin planificar</h3>
                 <div id="planificar">
                     <div  *ngFor="let task of tasks" class="col-md-6" >
@@ -205,7 +205,7 @@
                 
         </div>
         <div  id="calendarOptions" class="list-tareas" >
-            <ng-fullcalendar #ucCalendar   [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+            <ng-fullcalendar #ucCalendar  [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
                 (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
         </div>
     </div>

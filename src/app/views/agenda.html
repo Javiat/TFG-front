@@ -31,14 +31,12 @@
             
         </div>
         <div  class="col-md-7">
-            <div class="row list-tareas">
-                    <div class="col-md-8" >
-                        <p>Display event : {{displayEvent | json}}</p>
-                    </div>
-            </div>
-            <div *ngIf="calendarOptions" class="list-tareas" >
-                <ng-fullcalendar #ucCalendar   [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
-                    (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
-            </div>
+        <div class="row list-tareas">
+                
         </div>
+        <div  id="calendarOptions" class="list-tareas" >
+            <ng-fullcalendar #ucCalendar   [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
+                (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
+        </div>
+    </div>
     </div>
