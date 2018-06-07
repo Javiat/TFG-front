@@ -1,6 +1,6 @@
 import {Component,OnInit,ViewChild} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { EventService } from '../services/event.service';
+
 
 import {GLOBAL} from '../services/global';
 import {UserService} from '../services/user.service';
@@ -12,7 +12,7 @@ import { Options } from 'fullcalendar';
 @Component({
     selector:'agenda',
     templateUrl:'../views/agenda.html',
-    providers:[UserService,TaskService,EventService]
+    providers:[UserService,TaskService]
 })
 
 export class AgendaComponent implements OnInit{
@@ -33,7 +33,7 @@ export class AgendaComponent implements OnInit{
         private _router:Router,
         private _userService:UserService,
         private _taskService:TaskService,
-        private eventService:EventService
+        
 
     ){
         this.title='Listado de tareas';

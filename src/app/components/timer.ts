@@ -2,7 +2,6 @@
 import {Component,OnInit,ViewChild,AfterViewInit} from '@angular/core';
 import {  OnChanges, SimpleChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { EventService } from '../services/event.service';
 import { HttpModule }      from '@angular/http';
 import {GLOBAL} from '../services/global';
 import {UserService} from '../services/user.service';
@@ -19,8 +18,8 @@ import 'jquery';
 
 @Component({
   selector: 'timer',
-  templateUrl:'../views/game.html',
-  providers:[UserService,TaskService,EventService]
+  templateUrl:'../views/timer.html',
+  providers:[UserService,TaskService]
 })
 
 

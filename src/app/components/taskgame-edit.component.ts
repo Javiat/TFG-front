@@ -8,13 +8,14 @@ import {User} from '../models/user';
 import { forEach } from '@angular/router/src/utils/collection';
 import { CalendarComponent, FullCalendarModule } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
+var moment=require('moment');
 @Component({
     selector:'taskgame-edit',
     templateUrl:'../views/task-edit.html',
     providers:[UserService,TaskService]
 })
 
-export class TaskGameEditComponent implements OnInit ,AfterViewInit{
+export class TaskGameEditComponent implements OnInit {
     public titulo:string;
     public task:Task;
     public task_update:Task;
@@ -28,9 +29,9 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
     public tasks:Task[];
     public events=[];
     displayEvent: any;
-    @Input()  minutes: number;
-    @Input()  seconds: number;
-    @ViewChild(CalendarComponent) ucCalendar: CalendarComponent;
+    public minutes: number;
+    public seconds: number;
+   
     constructor(
         private _route:ActivatedRoute,
         private _router:Router,
@@ -47,43 +48,9 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
        
          
     }
-    ngAfterViewInit(){
-        this._taskService.getTasksGame(this.id).subscribe(
-            response=>{
-                if(!response.tasks){
-                    console.log('Este usuario no tiene tareas');  
-                }else{
-                    this.tasks=response.tasks;
-                    this.events.length=this.tasks.length;
-                    for(var i=0;i<this.tasks.length;i++){
-                        this.events[i]={
-                          id:this.tasks[i]._id,
-                          title: this.tasks[i].title,
-                          start:this.tasks[i].start,
-                          end: this.tasks[i].end,
-                          type:this.tasks[i].type,
-                          description:this.tasks[i].description,
-                          color:this.tasks[i].color,
-                          
-                        }
-                        var type=this.events[i].type;
-                       if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
-                          ||type=='solida urgente personal'){
-                          this.events[i].editable=false;
-                       }  
-                      }
-                }
-            },
-            error=>{
-                var errorMessage=<any>error;
-                if(errorMessage!=null){
-                  var body=JSON.parse(error._body);
-                 
-                }
-            }
-            )
-      }
+    
     ngOnInit(){
+
         console.log('task-edit.component cargado');
         this.calendarOptions = {
             locale:'es',
@@ -115,9 +82,29 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
          firstDay:1,
          allDaySlot:false
          };
-       this.getTask();     
+       
+        this.getTask();
+        this.resetTimer();
+        setInterval(() => this.tick(), 1000);  
     }
-    
+     resetTimer(): void {
+        this.minutes =JSON.parse(localStorage.getItem("minutes"));
+        this.seconds = JSON.parse(localStorage.getItem("seconds"));
+   
+   }
+
+   private tick(): void {
+        localStorage.setItem('minutes',JSON.stringify(this.minutes));
+        localStorage.setItem('seconds',JSON.stringify(this.seconds));
+        if (++this.seconds > 59) {
+         this.seconds = 0;
+         ++this.minutes;
+         if (++this.minutes > 25) {
+           this.minutes=0;
+           this.seconds=0;
+         }  
+     }
+   }
     getTask(){
         this._route.params.forEach((params:Params)=>{
             let id=params['id'];
@@ -127,8 +114,12 @@ export class TaskGameEditComponent implements OnInit ,AfterViewInit{
                     console.log('Este usuario no tiene tareas');
                        
                     }else{
-                        
                         this.task=response.task;
+                        var fecha_inicio=moment(this.task.start).format("YYYY-MM-DDThh:mm");
+                        var fecha_fin=moment(this.task.end).format("YYYY-MM-DDThh:mm");
+                        
+                        this.task.start=fecha_inicio;
+                        this.task.end=fecha_fin;
                         console.log(this.task);
                     }
                 },

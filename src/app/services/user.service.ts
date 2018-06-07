@@ -22,6 +22,9 @@ export class UserService{
                                 .map(res=>res.json());
     }
     
+    
+
+
     register(user_to_register){
         let json=JSON.stringify(user_to_register);
         let params=json;

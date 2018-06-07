@@ -1,6 +1,6 @@
 
 $(document).ready(function() {
-    console.log('entra');
+   
     $("#prueba").click(function(){
         $("#login").hide();
         $("#formulario_registro").show();
@@ -19,18 +19,15 @@ $(document).ready(function() {
         $("#planificadas").hide();
         
     });
-    // $("#btn-cargar3").hover(function(){
-    //     $("#descripcion_solucion").show();
-    // }, function(){
-    //     $("#descripcion_solucion").hide();
-    // });
-    // $("#btn-juego3").hover(function(){
-    //     $("#descripcion_base").show();
-    // }, function(){
-    //     $("#descripcion_base").hide();
-    // });
-    // function prueba(){
-    //     $("#btn-juego3").show(); 
-    // }
+    $("#tasks").click(function(){
+        $("#formulario").show();
+        $("#tareas").hide();
+        
+    });
+    $("#actualizar").click(function(){
+        $("#tareas").show();
+        $("#formulario").hide();
+        
+    });
     
 });

@@ -26,15 +26,15 @@ export class TaskService{
        return this._http.get(this.url+'get-task/'+id,options)
                             .map(res=>res.json());
     }
-    getTaskJuego(id:string){
+ 
+    getNivel(id:string,nivel:number){
+        
         let headers=new Headers({
             'Content-Type':'application/json'
-       });
-       let options=new RequestOptions({headers:headers}); 
-       return this._http.get(this.url+'get-task-juego/'+id,options)
+        });
+        return this._http.get(this.url+'get-task-juego/'+id+'/'+nivel,{headers:headers})
                             .map(res=>res.json());
-    }
-    
+        }
    getTasks(userId){
        let headers=new Headers({
             'Content-Type':'application/json'
@@ -43,14 +43,7 @@ export class TaskService{
        return this._http.get(this.url+'get-tasks/'+userId,options)
                             .map(res=>res.json());
    }
-   getNivel3(userId){
-    let headers=new Headers({
-         'Content-Type':'application/json'
-    });
-    let options=new RequestOptions({headers:headers});
-    return this._http.get(this.url+'nivel3'+userId,options)
-                         .map(res=>res.json());
-}
+
    getTasksGame(userId){
     let headers=new Headers({
          'Content-Type':'application/json'
@@ -60,12 +53,12 @@ export class TaskService{
                          .map(res=>res.json());
 }
 
-    caso_base(userId){
+    caso_base(userId:string,nivel:number){
     let headers=new Headers({
          'Content-Type':'application/json'
     });
     let options=new RequestOptions({headers:headers});
-    return this._http.get(this.url+'caso-base/'+userId,options)
+    return this._http.get(this.url+'caso-base/'+userId+'/'+nivel,options)
                          .map(res=>res.json());
     }
 

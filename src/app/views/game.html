@@ -1,10 +1,10 @@
 <div *ngIf="identity" class="row">
-    <div class="col-md-5">    
+    <div class="col-md-5" id="tareas" >    
         <div  class="col-md-12" >
                 <h3 id="tareas_planificar" >Tareas sin planificar</h3>
-                <div id="planificar">
-                    <div  *ngFor="let task of tasks" class="col-md-6" >
-                        <div class=" text-white bg-info " id="tasks"  style="background-color: #2E6368;border-color: #2E6368;" *ngIf="task.type=='liquida importante trabajo' && !task.colocado"  [routerLink]="['/update-task/',task._id]"  >
+                <div id="planificar" style="display:none;">
+                    <div  *ngFor="let task of tasks" class="col-md-6" id="listado" (click)="getTask(task._id)">
+                        <div class=" text-white bg-info " id="tasks"  style="background-color: #2E6368;border-color: #2E6368;" *ngIf="task.type=='liquida importante trabajo' && !task.colocado" [routerLink]="['/update-task/',task._id]">
                             <div   class="card text-white bg-info" style="background-color: #2E6368;border-color: #2E6368;">                                         
                                 <div class="card-header">{{task.title}} {{task.localizacion}} {{task.type}}</div>
                                 
@@ -91,7 +91,7 @@
         <div   class="col-md-12" >
         
             <h3 id="tareas_planificadas" style="cursor:pointer;">Tareas planificadas</h3>
-            <div id="planificadas" style="display:none;" >
+            <div id="planificadas"  >
                 <div  *ngFor="let task of tasks" class="col-md-6">
                     <div class=" text-white bg-info " id="tasks" style="background-color: #1F4245;border-color: #1F4245;" *ngIf="task.type=='liquida importante trabajo' && task.colocado"  [routerLink]="['/update-task/',task._id]" >
                         <div   class="card text-white bg-info" style="background-color: #1F4245;border-color: #1F4245;">                                         
@@ -189,11 +189,92 @@
                        
         </div>
     </div>
+    <div class="col-md-5"  id="resultados" style="display:none;">
+        <div class="col-md-12">
+                <h3 >Mal planificadas</h3>
+                <div  *ngFor="let task of mal_planificadas" class="col-md-6">
+                        <div>
+                            <div   >                                         
+                                <div class="card-header">{{task.title}} </div>
+                                
+                            </div>
+                        </div>
+                       
+                </div>
+                
+        </div>
+        <div class="col-md-12">
+                <h3 >Bien planificadas</h3>
+                <div  *ngFor="let task of bien_planificadas" class="col-md-6">
+                        <div>
+                            <div>                                         
+                                <div class="card-header">{{task.title}} </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        <div>
+            {{puntos}}
+        </div>
+    </div>
+    <div class="col-md-5"  id="formulario" style="display: none;">
+            <div class="col-md-12">
+                    <form #formTask="ngForm" (ngSubmit)="onSubmit()">
+                            <p>
+                                    <label>Título:</label>
+                                    <input type="text" #title="ngModel" name="title" [(ngModel)]="task.title" class="form-control" required/>
+                                  </p>
+                                 
+                                  <p>
+                                    <label>Localización:</label>
+                                    <input type="text" #localizacion="ngModel" name="localizacion" [(ngModel)]="task.localizacion" class="form-control" required/>
+                                </p>
+                                  <p>
+                                    <label>Fecha de inicio:</label>
+                                    <input #start="ngModel" name="start" [(ngModel)]="task.start" type="datetime-local"  class="form-control" required/>
+                                  </p>
+                                  <p>
+                                    <label>Fecha de fin:</label>
+                                    <input #end="ngModel" name="end" [(ngModel)]="task.end" type="datetime-local" class="form-control" required/>
+                                  </p>
+                                  <p>
+                                    <label>Duracion</label>
+                                    <input #duration="ngModel" name="duration" [(ngModel)]="task.duration" type="text" class="form-control" required/>
+                                  </p>
+                                  <p>
+                                    <label>Tipo:</label>
+                                    <select type="options" #type="ngModel" name="type" [(ngModel)]="task.type" value="task.type" class="form-control" required>
+                                    
+                                        <option value="solida importante personal">solida importante personal</option>
+                                        <option value="solida importante trabajo">solida importante trabajo</option>
+                                        <option value="solida urgente personal">solida urgente personal</option>
+                                        <option value="solida urgente trabajo">solida urgente trabajo</option>
+                                        <option value="solida personal">solida personal</option>
+                                        <option value="solida trabajo">solida trabajo</option>
+                                        <option value="liquida importante personal">liquida importante personal</option>
+                                        <option value="liquida importante trabajo">liquida importante trabajo</option>
+                                        <option value="liquida urgente personal">liquida urgente personal</option>
+                                        <option value="liquida urgente trabajo">liquida urgente trabajo</option>
+                                        <option value="liquida personal">liquida personal</option>
+                                        <option value="liquida trabajo">liquida trabajo</option>
+                                    </select>
+                                    
+                                  </p>
+                                  <P>
+                                    <input (click)="actualizar()"  id="actualizar" class="btn btn-success" value="Actualizar"  />
+                                  </P>
+                          <P>
+                            <input  (click)="onDeleteTask(task._id)" class="btn btn-danger" value="Eliminar"  />
+                          </P>
+                    </form>
+            </div>
+               
+    </div>
     <div  class="col-md-7">
         <div class="row list-tareas">
                 <div class="col-md-2" id="reloj">
-                    <p>{{minutes}}:{{seconds}}</p>
-                    
+                    <p>{{minutes}}:{{seconds}}</p>      
                 </div>
                
                 <div class="col-md-10" style="text-align: right;">
@@ -208,6 +289,7 @@
             <ng-fullcalendar #ucCalendar  [options]="calendarOptions" (eventClick)="eventClick($event.detail)" (eventDrop)="updateEvent($event.detail)"
                 (eventResize)="updateEvent($event.detail)" (dayClick)="dayClick($event.detail)" (clickButton)="clickButton($event.detail)" [(eventsModel)]="events"></ng-fullcalendar>
         </div>
+        
     </div>
 </div>
 

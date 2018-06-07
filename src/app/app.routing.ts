@@ -20,6 +20,7 @@ const appRoutes:Routes=[
     {path:'agenda',component:AgendaComponent},
     {path:'add-task/:user',component:TaskAddComponent},
     {path:'update-task/:id',component:TaskGameEditComponent},
+    {path:'get-task-game/:id',component:HomeComponent},
     {path:'update-task-agenda/:id',component:TaskAgendaEditComponent},
     {path:'update-event/:id',component:GameComponent},
     {path:'delete-task/:id',component:TaskGameEditComponent},

@@ -3,7 +3,6 @@ import { User } from './models/user';
 import { UserService } from './services/user.service';
 import {GLOBAL} from './services/global';
 import {Router, ActivatedRoute, Params} from '@angular/router';
-import { EventService } from './services/event.service';
 import {TaskService} from './services/task.service';
 import { Task } from './models/task';
 
@@ -12,7 +11,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  providers:[UserService,EventService,TaskService]
+  providers:[UserService,TaskService]
 })
 export class AppComponent implements OnInit{
   public title = 'Calendar';
@@ -29,7 +28,6 @@ export class AppComponent implements OnInit{
     private _userService:UserService,
     private _route:ActivatedRoute,
     private _router:Router,
-    private eventService:EventService,
     private _taskService:TaskService
   ){
     this.user=new User('','','','','',0,'');
@@ -56,7 +54,7 @@ export class AppComponent implements OnInit{
           localStorage.setItem('identity',JSON.stringify(identity));
           this.user=new User('','','','','',0,'');
           this.user_register=new User('','','','','',0,'');
-           //Conseguir el token para enviarselo a cada peticion
+           
          }
       },
       error=>{
