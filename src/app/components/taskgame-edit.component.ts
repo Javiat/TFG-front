@@ -1,6 +1,7 @@
 import {Component,OnInit,ViewChild,AfterViewInit,Input} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import {GLOBAL} from '../services/global';
+import {Calendar} from '../services/calendar'; 
 import {UserService} from '../services/user.service';
 import {TaskService} from '../services/task.service';
 import {Task} from '../models/task';
@@ -27,7 +28,7 @@ export class TaskGameEditComponent implements OnInit {
     public is_edit;
     public calendarOptions: Options;
     public tasks:Task[];
-    public events=[];
+    public events=new Array();
     displayEvent: any;
     public minutes: number;
     public seconds: number;
@@ -45,50 +46,23 @@ export class TaskGameEditComponent implements OnInit {
         this.is_edit=true;
         this.tasks=[];
         this.task=new Task('','','','Agenda Personal',null,null,null,'',null,'','');
-       
+        this.calendarOptions=Calendar;
          
     }
     
     ngOnInit(){
 
         console.log('task-edit.component cargado');
-        this.calendarOptions = {
-            locale:'es',
-           header: {
-             left: 'prev,next',
-             center: 'title',
-             right: 'month,agendaWeek,agendaDay',
-             
-         },
-         
-         events:[],
-         businessHours: {
-           start: '09:00', // hora final
-           end: '21:00', // hora inicial
-           dow: [ 1, 2, 3, 4, 5 ],
-         },
-         buttonText: {
-          month:'Mes',
-          week:'Semana',
-          day:'Dia'
-         },
-  
-         editable: true,
-         eventLimit: false,
-         eventConstraint: "businessHours",
-         defaultView:'agendaWeek',
-         themeSystem: 'bootstrap3',
-         columnFormat:'dddd D' ,
-         firstDay:1,
-         allDaySlot:false
-         };
-       
         this.getTask();
+         setTimeout(() => {
+            
+          }, 1000);
+        this.getTasks();
         this.minutes =JSON.parse(localStorage.getItem("minutes"));
         this.seconds = JSON.parse(localStorage.getItem("seconds"));
         console.log(localStorage);
         setInterval(() => this.tick(), 1000); 
-        this.getTasks();
+        
     }
      resetTimer(): void {
         

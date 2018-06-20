@@ -200,10 +200,9 @@ html,body{
     text-align: center;
     color: #F3F6FF;
 }
-#descripcion_solucion{
+.descripcion_solucion{
     margin: 13px 50px;
     text-align: left;
-    
     font-size: 16px;
 }
 .fc-today{
@@ -215,15 +214,12 @@ html,body{
 }
 
 #partidas_buenas{
-    
-    
     background-color: #9ABE05;
     color: #F3F6FF;
     margin-top: 10px;
     border-radius: 9px;
     padding: 4px 17px;
     height: auto;
- 
     
 }
 #partidas_malas{

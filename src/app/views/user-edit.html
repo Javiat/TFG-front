@@ -1,60 +1,63 @@
-<div class="col-md-6" *ngIf="identity">
-    <div class="col-md-6">
-            <h1>{{title}}</h1>
-              <div *ngIf="alertUpdate">
-                <div class="alert alert-info">
-                     {{alertUpdate}}
-                </div>
-              </div>
-            <form class="col-md-10" #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" >
-                <p>
-                  <label>Nombre:</label>
-                  <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required/>
-                </p>
-                <p>
-                    <label>Apellidos:</label>
-                    <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user.surname" class="form-control" required/>
-                </p>
-                <p>
-                  <label>Email:</label>
-                  <input #email="ngModel" name="email" [(ngModel)]="user.email" type="email" class="form-control" required/>
-                </p>
-                <!-- <p>
-                    <label>Contraseña:</label>
-                    <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control" required/>
-                </p> -->
-                <div class="image_fot_edit" *ngIf="user.image && user.image !='null'">
-                        <img style="width: 100px;" src="{{url + 'get-image-user/' + user.image}}"/>
-                </div>
-                    <p>
-                       <label>Sube fu foto:</label> 
-                       <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)"/>
-                    </p>
+<div class="row"  *ngIf="identity">
+        <div class="col-md-6">
+               
+                        <h1 style="text-align: center;">{{title}}</h1>
+                          <div *ngIf="alertUpdate">
+                            <div class="alert alert-info">
+                                 {{alertUpdate}}
+                            </div>
+                          </div>
+                        <form class="col-md-10" #userUpdateForm="ngForm" (ngSubmit)="onSubmit()" >
+                            <p>
+                              <label>Nombre:</label>
+                              <input type="text" #name="ngModel" name="name" [(ngModel)]="user.name" class="form-control" required/>
+                            </p>
+                            <p>
+                                <label>Apellidos:</label>
+                                <input type="text" #surname="ngModel" name="surname" [(ngModel)]="user.surname" class="form-control" required/>
+                            </p>
+                            <p>
+                              <label>Email:</label>
+                              <input #email="ngModel" name="email" [(ngModel)]="user.email" type="email" class="form-control" required/>
+                            </p>
+                            <!-- <p>
+                                <label>Contraseña:</label>
+                                <input type="password" #password="ngModel" name="password" [(ngModel)]="user.password" class="form-control" required/>
+                            </p> -->
+                            <div class="image_fot_edit" *ngIf="user.image && user.image !='null'">
+                                    <img style="width: 100px;" src="{{url + 'get-image-user/' + user.image}}"/>
+                            </div>
+                                <p>
+                                   <label>Sube fu foto:</label> 
+                                   <input type="file" placeholder="Subir imagen..." (change)="fileChangeEvent($event)"/>
+                                </p>
+                            
+                            <input type="submit" value="Actualizar" class="btn btn-primary" />
+                            
+                        </form>
                 
-                <input type="submit" value="Actualizar" class="btn btn-primary" />
-                
-            </form>
-    </div>
-</div>
-<div class="col-md-6">
-    <div  *ngFor="let partida of partidas" class="col-md-6" id="listado" >
-            <div class=" text-white bg-info " id="partidas_buenas"   *ngIf="partida.puntos > 50">
-                <div>                                         
-                    <div class="card-header">Bien planificada de Nivel: {{partida.nivel}}</div>
-                    <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
-                    <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
-                    <div class="card-header">Duración: {{partida.duracion}}</div>
-                    <div class="card-header">Puntos: {{partida.puntos}}</div>
+            </div>
+            <div class="col-md-6">
+                <h1 style="text-align: center;">Partidas jugadas</h1>
+                <div  *ngFor="let partida of partidas" class="col-md-6" id="listado" >
+                        <div class=" text-white bg-info " id="partidas_buenas"   *ngIf="partida.puntos > 50">
+                            <div>                                         
+                                <div class="card-header">Bien planificada de Nivel: {{partida.nivel}}</div>
+                                <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
+                                <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                                <div class="card-header">Duración: {{partida.duracion}}</div>
+                                <div class="card-header">Puntos: {{partida.puntos}}</div>
+                            </div>
+                        </div>
+                        <div class=" text-white bg-info " id="partidas_malas"   *ngIf="partida.puntos < 50">
+                                <div >                                         
+                                    <div class="card-header">Mal planificada de Nivel: {{partida.nivel}}</div>
+                                    <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
+                                    <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                                    <div class="card-header">Duración: {{partida.duracion}}</div>
+                                    <div class="card-header">Puntos: {{partida.puntos}}</div>
+                                </div>
+                        </div>
                 </div>
             </div>
-            <div class=" text-white bg-info " id="partidas_malas"   *ngIf="partida.puntos < 50">
-                    <div >                                         
-                        <div class="card-header">Mal planificada de Nivel: {{partida.nivel}}</div>
-                        <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
-                        <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
-                        <div class="card-header">Duración: {{partida.duracion}}</div>
-                        <div class="card-header">Puntos: {{partida.puntos}}</div>
-                    </div>
-            </div>
-    </div>
 </div>

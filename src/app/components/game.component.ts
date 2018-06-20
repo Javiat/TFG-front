@@ -3,6 +3,7 @@ import {  OnChanges, SimpleChanges } from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { HttpModule }      from '@angular/http';
 import {GLOBAL} from '../services/global';
+import {Calendar} from '../services/calendar';
 import {UserService} from '../services/user.service';
 import {Task} from '../models/task';
 import {User} from '../models/user';
@@ -17,6 +18,8 @@ import { Options } from 'fullcalendar';
 import {TimerComponent} from './timer';
 import * as $ from 'jquery';
 import 'jquery';
+
+
 var moment=require('moment');
 @Component({
     selector:'game',
@@ -38,8 +41,7 @@ export class GameComponent implements OnInit{
     public alertMessage;
     public type;
     public filesToUpload:Array<File>;
-    calendarOptions: Options;
-    calendar:FullCalendarModule;
+    public calendarOptions: Options;
     displayEvent: any;
     public events = new Array();
     public minutes: number;
@@ -53,7 +55,8 @@ export class GameComponent implements OnInit{
         private _userService:UserService,
         private _taskService:TaskService,
         private _partidaService:PartidaService,
-        private httpService: HttpClient      
+        private httpService: HttpClient,
+           
     ){
         this.title='Listado de tareas';
         this.task=new Task('','','','',null,null,null,'',null,'','');
@@ -62,56 +65,28 @@ export class GameComponent implements OnInit{
         this.user=this.identity;
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
-        this.events=this.getTasks();
-        
+        this.calendarOptions=Calendar;
     }
    
     ngOnInit(){
-        console.log('game.component.ts cargado');
+      $.getScript('../assets/js/script.js');
         
-        $.getScript('../assets/js/script.js');
-        this.calendarOptions = {
-              locale:'es',
-              header: {
-                left: 'prev,next',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay',
-                
-            },
-            
-            events:[],
-            businessHours: {
-              start: '09:00', // hora final
-              end: '21:00', // hora inicial
-              dow: [ 1, 2, 3, 4, 5 ],
-            },
-            buttonText: {
-              month:'Mes',
-              week:'Semana',
-              day:'Dia'
-            },
-      
-            editable: true,
-            eventLimit: false,
-            eventConstraint: "businessHours",
-            defaultView:'agendaWeek',
-            themeSystem: 'bootstrap3',
-            columnFormat:'dddd D' ,
-            firstDay:1,
-            allDaySlot:false,
-            
-         };  
+       setTimeout(() => {
+          
+        }, 2000);
+       
+        this.getTasks();
          var f_inicio=new Date();
          this.partida.inicio=f_inicio;
          this.minutes =JSON.parse(localStorage.getItem("minutes"));
          this.seconds = JSON.parse(localStorage.getItem("seconds"));
          console.log(localStorage);
         setInterval(() => this.tick(), 1000);
-        this.getTasks();
+        
         
       }
     
-
+      
     
    resetTimer(): void {
     
@@ -136,7 +111,7 @@ export class GameComponent implements OnInit{
     this.isPaused = !this.isPaused;
     
   }
-
+  
      getTasks(){
         this._taskService.getTasksGame(this.id).subscribe(
         response=>{
@@ -281,13 +256,10 @@ export class GameComponent implements OnInit{
         console.log(this.partida);
         this.savePartida();
         this.onDeleteTask();
-        
-        localStorage.setItem('minutes',JSON.stringify(this.minutes));
-        localStorage.setItem('seconds',JSON.stringify(this.seconds));
         localStorage.removeItem('minutes');
         localStorage.removeItem('seconds');
         this.togglePause();
-       
+        Calendar.events=[];
     }
     savePartida(){
       var f=new Date();
