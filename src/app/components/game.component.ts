@@ -45,7 +45,7 @@ export class GameComponent implements OnInit{
     public minutes: number;
     public seconds: number;
     public puntos:number;
-
+    public isPaused: boolean;
    
     constructor(
         private _router:Router,
@@ -58,7 +58,7 @@ export class GameComponent implements OnInit{
         this.title='Listado de tareas';
         this.task=new Task('','','','',null,null,null,'',null,'','');
         this.identity=this._userService.getIdentity();
-        this.partida=new Partida('',null,null,0,this.identity._id,null,null,0);
+        this.partida=new Partida('',null,null,0,this.identity._id,null,null,null,0);
         this.user=this.identity;
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
@@ -68,7 +68,7 @@ export class GameComponent implements OnInit{
    
     ngOnInit(){
         console.log('game.component.ts cargado');
-        console.log(localStorage);
+        
         $.getScript('../assets/js/script.js');
         this.calendarOptions = {
               locale:'es',
@@ -103,22 +103,25 @@ export class GameComponent implements OnInit{
          };  
          var f_inicio=new Date();
          this.partida.inicio=f_inicio;
-        this.resetTimer();
+         this.minutes =JSON.parse(localStorage.getItem("minutes"));
+         this.seconds = JSON.parse(localStorage.getItem("seconds"));
+         console.log(localStorage);
         setInterval(() => this.tick(), 1000);
-        this.getTasks(); 
+        this.getTasks();
+        
       }
     
 
     
    resetTimer(): void {
-    this.minutes =JSON.parse(localStorage.getItem("minutes"));
-    this.seconds = JSON.parse(localStorage.getItem("seconds"));
+    
    
    }
 
    private tick(): void {
     localStorage.setItem('minutes',JSON.stringify(this.minutes));
     localStorage.setItem('seconds',JSON.stringify(this.seconds));
+    if (!this.isPaused) {
        if (++this.seconds > 59) {
          this.seconds = 0;
          
@@ -127,7 +130,12 @@ export class GameComponent implements OnInit{
            this.seconds=0;
          }  
      }
+    }
    }
+   togglePause(): void {
+    this.isPaused = !this.isPaused;
+    
+  }
 
      getTasks(){
         this._taskService.getTasksGame(this.id).subscribe(
@@ -255,9 +263,6 @@ export class GameComponent implements OnInit{
   );
    }
     evaluar(){
-      this.minutes=0;
-      this.seconds=0;
-      console.log(localStorage);
         for(var i=0;i<this.tasks.length-1;i++){
           if(this.tasks[i].end!=null && this.tasks[i+1].start!=null){
             this.tasks.sort(function(a,b){
@@ -267,12 +272,22 @@ export class GameComponent implements OnInit{
             console.log('No se puede comparar');
           }
         }
-         $("#resultados").show();
-          $("#tareas").hide();
+        $("#resultados").show();
+        $("#tareas").hide();
         this.compararFechas();
         this.partida.puntos=this.puntos;
-        this.savePartida();   
+        this.partida.nivel=JSON.parse(localStorage.getItem('nivel'));
+        localStorage.removeItem('nivel');
+        console.log(this.partida);
+        this.savePartida();
         this.onDeleteTask();
+        
+        localStorage.setItem('minutes',JSON.stringify(this.minutes));
+        localStorage.setItem('seconds',JSON.stringify(this.seconds));
+        localStorage.removeItem('minutes');
+        localStorage.removeItem('seconds');
+        this.togglePause();
+       
     }
     savePartida(){
       var f=new Date();

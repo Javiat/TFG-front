@@ -29,4 +29,12 @@ export class PartidaService{
     return this._http.put(this.url+'update-partida/'+id,params,{headers:headers})
                         .map(res=>res.json());
     }
+
+    getPartidas(id:string){
+        let headers=new Headers({
+            'Content-Type':'application/json'
+        });
+        return this._http.get(this.url+'get-partidas/'+id,{headers:headers})
+                            .map(res=>res.json());
+    }
 }

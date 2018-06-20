@@ -84,12 +84,14 @@ export class TaskGameEditComponent implements OnInit {
          };
        
         this.getTask();
-        this.resetTimer();
-        setInterval(() => this.tick(), 1000);  
-    }
-     resetTimer(): void {
         this.minutes =JSON.parse(localStorage.getItem("minutes"));
         this.seconds = JSON.parse(localStorage.getItem("seconds"));
+        console.log(localStorage);
+        setInterval(() => this.tick(), 1000); 
+        this.getTasks();
+    }
+     resetTimer(): void {
+        
    
    }
 
@@ -98,7 +100,7 @@ export class TaskGameEditComponent implements OnInit {
         localStorage.setItem('seconds',JSON.stringify(this.seconds));
         if (++this.seconds > 59) {
          this.seconds = 0;
-         ++this.minutes;
+         
          if (++this.minutes > 25) {
            this.minutes=0;
            this.seconds=0;

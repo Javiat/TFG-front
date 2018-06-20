@@ -10,6 +10,7 @@ import { Task } from '../models/task';
 export class TaskService{
     public url:string;
     public identity;
+    public nivel:number;
     constructor(private _http:Http){
         this.url=GLOBAL.url;
     }
@@ -27,14 +28,17 @@ export class TaskService{
                             .map(res=>res.json());
     }
  
-    getNivel(id:string,nivel:number){
+    solucion_inicial(id:string,nivel:number){
         
         let headers=new Headers({
             'Content-Type':'application/json'
         });
-        return this._http.get(this.url+'get-task-juego/'+id+'/'+nivel,{headers:headers})
+        return this._http.get(this.url+'get-task-game/'+id+'/'+nivel,{headers:headers})
                             .map(res=>res.json());
         }
+           
+        
+        
    getTasks(userId){
        let headers=new Headers({
             'Content-Type':'application/json'

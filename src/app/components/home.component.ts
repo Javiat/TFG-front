@@ -39,7 +39,10 @@ export class HomeComponent implements OnInit{
         console.log('home.component.ts cargado');
         $.getScript('../assets/js/script.js');
         this.identity=this._userService.getIdentity();
-        
+        console.log(localStorage);
+        localStorage.removeItem('minutes');
+        localStorage.removeItem('seconds');
+        console.log(localStorage);
     }
 
     solucion_inicial(nivel){
@@ -48,7 +51,8 @@ export class HomeComponent implements OnInit{
         this.identity=this._userService.getIdentity();
         localStorage.setItem('minutes',JSON.stringify(minutes));
         localStorage.setItem('seconds',JSON.stringify(seconds));
-        this._taskService.getNivel(this.identity._id,nivel).subscribe(
+        localStorage.setItem('nivel',JSON.stringify(nivel));
+        this._taskService.solucion_inicial(this.identity._id,nivel).subscribe(
             response=>{
                 if(!response){
                     console.log(response);

@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 
 import {UserService} from '../services/user.service';
+import {PartidaService} from '../services/partidas.services';
 import {User} from '../models/user';
 import {GLOBAL} from '../services/global';
 @Component({
     selector: 'user-edit',
     templateUrl: '../views/user-edit.html',
-    providers: [UserService]
+    providers: [UserService,PartidaService]
 })
 export class UserEditComponent implements OnInit {
     public title:string;
@@ -15,8 +16,10 @@ export class UserEditComponent implements OnInit {
     public alertUpdate;
     public filesToUpload:Array<File>;
     public url:string;
+    public partidas=[];
     constructor(
-        private _userService:UserService
+        private _userService:UserService,
+        private _partidaService:PartidaService
     ){
         //LocalStorage
         this.identity=this._userService.getIdentity();
@@ -27,6 +30,8 @@ export class UserEditComponent implements OnInit {
 
     ngOnInit(){
         console.log('user-edit.component.ts cargado');
+        this.getPartidas();
+        $.getScript('../assets/js/script.js');
     }
     onSubmit(){
         this._userService.updateUser(this.user).subscribe(
@@ -88,5 +93,22 @@ export class UserEditComponent implements OnInit {
             xhr.open('POST',url,true);
             xhr.send(formData);
         });
+    }
+
+    getPartidas(){
+        this._partidaService.getPartidas(this.user._id).subscribe(
+            response=>{
+                if(!response.partidas){
+                    console.log('error');
+                }else{
+                    this.partidas=response.partidas;
+                    console.log(this.partidas);
+                }
+            },
+            error=>{
+                console.log('error');
+            }
+            
+        )
     }
 }

@@ -1,5 +1,5 @@
-<div class="col-lg-6" *ngIf="identity">
-    <div class="col-lg-6">
+<div class="col-md-6" *ngIf="identity">
+    <div class="col-md-6">
             <h1>{{title}}</h1>
               <div *ngIf="alertUpdate">
                 <div class="alert alert-info">
@@ -34,5 +34,27 @@
                 <input type="submit" value="Actualizar" class="btn btn-primary" />
                 
             </form>
+    </div>
+</div>
+<div class="col-md-6">
+    <div  *ngFor="let partida of partidas" class="col-md-6" id="listado" >
+            <div class=" text-white bg-info " id="partidas_buenas"   *ngIf="partida.puntos > 50">
+                <div>                                         
+                    <div class="card-header">Bien planificada de Nivel: {{partida.nivel}}</div>
+                    <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
+                    <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                    <div class="card-header">Duración: {{partida.duracion}}</div>
+                    <div class="card-header">Puntos: {{partida.puntos}}</div>
+                </div>
+            </div>
+            <div class=" text-white bg-info " id="partidas_malas"   *ngIf="partida.puntos < 50">
+                    <div >                                         
+                        <div class="card-header">Mal planificada de Nivel: {{partida.nivel}}</div>
+                        <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
+                        <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                        <div class="card-header">Duración: {{partida.duracion}}</div>
+                        <div class="card-header">Puntos: {{partida.puntos}}</div>
+                    </div>
+            </div>
     </div>
 </div>
