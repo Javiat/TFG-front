@@ -43,8 +43,8 @@
                         <div class=" text-white bg-info " id="partidas_buenas"   *ngIf="partida.puntos > 50">
                             <div>                                         
                                 <div class="card-header">Bien planificada de Nivel: {{partida.nivel}}</div>
-                                <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
-                                <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                                <div class="card-header">Inicio: {{partida.inicio}}</div>
+                                <div class="card-header">Fin: {{partida.fin}}</div>
                                 <div class="card-header">Duración: {{partida.duracion}}</div>
                                 <div class="card-header">Puntos: {{partida.puntos}}</div>
                             </div>
@@ -52,8 +52,8 @@
                         <div class=" text-white bg-info " id="partidas_malas"   *ngIf="partida.puntos < 50">
                                 <div >                                         
                                     <div class="card-header">Mal planificada de Nivel: {{partida.nivel}}</div>
-                                    <div class="card-header">Inicio: {{partida.inicio.slice(5,10)}}-2018 {{partida.inicio.slice(11,19)}}</div>
-                                    <div class="card-header">Fin: {{partida.fin.slice(5,10)}}-2018 {{partida.fin.slice(11,19)}}</div>
+                                    <div class="card-header">Inicio: {{partida.inicio}}</div>
+                                    <div class="card-header">Fin: {{partida.fin}}</div>
                                     <div class="card-header">Duración: {{partida.duracion}}</div>
                                     <div class="card-header">Puntos: {{partida.puntos}}</div>
                                 </div>

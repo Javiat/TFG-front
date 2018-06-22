@@ -4,7 +4,7 @@ export class Partida{
         public _id:string,
         public inicio:Date,
         public fin:Date,
-        public duracion:Number,
+        public duracion:string,
         public user:string,
         public bien_planificadas:Array<String>,
         public mal_planificadas:Array<String>,

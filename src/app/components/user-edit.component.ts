@@ -4,6 +4,7 @@ import {UserService} from '../services/user.service';
 import {PartidaService} from '../services/partidas.services';
 import {User} from '../models/user';
 import {GLOBAL} from '../services/global';
+var moment=require('moment');
 @Component({
     selector: 'user-edit',
     templateUrl: '../views/user-edit.html',
@@ -102,6 +103,15 @@ export class UserEditComponent implements OnInit {
                     console.log('error');
                 }else{
                     this.partidas=response.partidas;
+                    
+                    
+                    for(var i=0;i<this.partidas.length;i++){
+                        
+                        this.partidas[i].inicio=moment(this.partidas[i].inicio).format("YYYY-MM-DD HH:mm:ss");
+                        this.partidas[i].fin=moment(this.partidas[i].fin).format("YYYY-MM-DD HH:mm:ss")
+                    
+                        
+                    }
                     console.log(this.partidas);
                 }
             },

@@ -189,13 +189,14 @@
                        
         </div>
     </div>
-    <div class="col-md-5"  id="resultados" style="display:none;">
+    <div class="col-md-5" id="resultados" style="display:none;">
+        <h1 class="title_results">Resultados</h1>
         <div class="col-md-12">
                 <h3 >Mal planificadas</h3>
                 <div  *ngFor="let task of mal_planificadas" class="col-md-6">
                         <div>
                             <div   >                                         
-                                <div class="card-header">{{task.title}} </div>
+                                <p class="card-header">{{task.title}}  </p>
                                 
                             </div>
                         </div>
@@ -208,14 +209,15 @@
                 <div  *ngFor="let task of bien_planificadas" class="col-md-6">
                         <div>
                             <div>                                         
-                                <div class="card-header">{{task.title}} </div>
+                                <p class="card-header">{{task.title}} </p>
                                 
                             </div>
                         </div>
                     </div>
         </div>
-        <div>
-            {{puntos}}
+        <div class="col-md-12" class="results_points">
+            <p>Has conseguido una puntacion de: {{puntos}} puntos</p>
+            <p>Para ver mas información acerca de la partida ve a la seccion <a [routerLink]="['/mis-datos']">tus datos.</a></p>
         </div>
     </div>
     <div class="col-md-5"  id="formulario" style="display: none;">
@@ -276,8 +278,10 @@
                 <div class="col-md-2" id="reloj">
                     <p>{{minutes}}:{{seconds}}</p>      
                 </div>
-               
-                <div class="col-md-10" style="text-align: right;">
+                <div class="col-md-2" id="reloj">
+                    <p>Nivel: {{nivel}}</p>
+                </div>
+                <div class="col-md-8" style="text-align: right;">
                     <a  class="btn btn-evaluar" (click)="evaluar()"  >
                         Evaluar
                     </a>

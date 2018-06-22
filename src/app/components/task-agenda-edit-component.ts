@@ -10,8 +10,8 @@ import { forEach } from '@angular/router/src/utils/collection';
 import { CalendarComponent, FullCalendarModule } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 @Component({
-    selector:'taskagenda-edit',
-    templateUrl:'../views/taskagenda-edit.html',
+    selector:'task-agenda-edit',
+    templateUrl:'../views/task-agenda-edit.html',
     providers:[UserService,TaskService]
 })
 

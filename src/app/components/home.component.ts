@@ -83,6 +83,7 @@ export class HomeComponent implements OnInit{
             this.identity=this._userService.getIdentity();
             localStorage.setItem('minutes',JSON.stringify(minutes));
             localStorage.setItem('seconds',JSON.stringify(seconds));
+            localStorage.setItem('nivel',JSON.stringify(nivel));
             this._taskService.caso_base(this.identity._id,nivel).subscribe(
                 response=>{
                     if(!response){

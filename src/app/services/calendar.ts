@@ -28,4 +28,5 @@ export var Calendar:Options={
   columnFormat:'dddd D' ,
   firstDay:1,
   allDaySlot:false,
+ 
 };

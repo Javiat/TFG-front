@@ -29,25 +29,29 @@ $(document).ready(function() {
         $("#formulario").hide();
         
     });
-    $("#nivel1").mouseover(function(){
-        $("#descripcion_solucion1").show(); 
+    $("#scroll_nivel1").click(function(){
+        $("#descripcion_solucion1").show();
+        $("#scroll_nivel1").hide();
     });
-    $("#nivel1").mouseout(function(){
+    $("#no_scroll_nivel1").click(function(){
         $("#descripcion_solucion1").hide();
-       
+        $("#scroll_nivel1").show();
     });
-    $("#nivel2").mouseover(function(){
-        $("#descripcion_solucion2").show(); 
+    
+    $("#scroll_nivel2").click(function(){
+        $("#descripcion_solucion2").show();
+        $("#scroll_nivel2").hide();
     });
-    $("#nivel2").mouseout(function(){
+    $("#no_scroll_nivel2").click(function(){
         $("#descripcion_solucion2").hide();
-       
+        $("#scroll_nivel2").show();
     });
-    $("#nivel3").mouseover(function(){
-        $("#descripcion_solucion3").show(); 
+    $("#scroll_nivel3").click(function(){
+        $("#descripcion_solucion3").show();
+        $("#scroll_nivel3").hide();
     });
-    $("#nivel3").mouseout(function(){
+    $("#no_scroll_nivel3").click(function(){
         $("#descripcion_solucion3").hide();
-       
+        $("#scroll_nivel3").show();
     });
 });

@@ -11,8 +11,8 @@ import { CalendarComponent, FullCalendarModule } from 'ng-fullcalendar';
 import { Options } from 'fullcalendar';
 var moment=require('moment');
 @Component({
-    selector:'taskgame-edit',
-    templateUrl:'../views/task-edit.html',
+    selector:'task-game-edit',
+    templateUrl:'../views/task-game-edit.html',
     providers:[UserService,TaskService]
 })
 
@@ -64,10 +64,6 @@ export class TaskGameEditComponent implements OnInit {
         setInterval(() => this.tick(), 1000); 
         
     }
-     resetTimer(): void {
-        
-   
-   }
 
    private tick(): void {
         localStorage.setItem('minutes',JSON.stringify(this.minutes));
@@ -91,12 +87,12 @@ export class TaskGameEditComponent implements OnInit {
                        
                     }else{
                         this.task=response.task;
-                        var fecha_inicio=moment(this.task.start).format("YYYY-MM-DDThh:mm");
-                        var fecha_fin=moment(this.task.end).format("YYYY-MM-DDThh:mm");
+                        // var fecha_inicio=moment(this.task.start).format("YYYY-MM-DDThh:mm");
+                        // var fecha_fin=moment(this.task.end).format("YYYY-MM-DDThh:mm");
                         
-                        this.task.start=fecha_inicio;
-                        this.task.end=fecha_fin;
-                        console.log(this.task);
+                        // this.task.start=fecha_inicio;
+                        // this.task.end=fecha_fin;
+                        // console.log(this.task);
                     }
                 },
                 error=>{
@@ -189,6 +185,29 @@ export class TaskGameEditComponent implements OnInit {
             }
         )
         
+    }
+    desplanificar(id){
+        this.task.start=null;
+        this.task.end=null;
+        this._taskService.updateTask(id,this.task).subscribe(
+            response=>{
+                if(!response.task){
+                    this.alertUpdate='Error en el servidor';
+                }else{
+                    this.task=response.task;
+                    this._router.navigate(['/game'])
+
+                }
+            },
+            error=>{
+                var errorMessage=<any>error;
+                if(errorMessage!=null){
+                  var body=JSON.parse(error._body);
+                  this.alertUpdate=body.message;
+                }
+            }
+
+        );
     }
     clickButton(model: Task) {
         this.displayEvent = model;

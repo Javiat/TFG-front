@@ -8,8 +8,8 @@ import {UserEditComponent} from './components/user-edit.component'
 import {GameComponent} from './components/game.component';
 import {AgendaComponent} from './components/agenda.component';
 import {TaskAddComponent} from './components/task-add.component';
-import {TaskGameEditComponent} from './components/taskgame-edit.component';
-import {TaskAgendaEditComponent} from './components/taskagenda-edit-component';
+import {TaskGameEditComponent} from './components/task-game-edit.component';
+import {TaskAgendaEditComponent} from './components/task-agenda-edit-component';
 //Import Home
 import {HomeComponent} from './components/home.component';
 

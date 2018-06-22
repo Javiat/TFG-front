@@ -212,7 +212,6 @@ html,body{
     font-size: 20px;
     font-weight: bold;
 }
-
 #partidas_buenas{
     background-color: #9ABE05;
     color: #F3F6FF;
@@ -231,4 +230,25 @@ html,body{
     padding: 4px 17px;
     height: auto;
     
+}
+#info_results{
+    padding: 30px;
+}
+.btn_more_info{
+    background-color: #53B4BD;
+    border-color: #53B4BD;
+    color: #F3F6FF;
+    font-weight: bold;
+    border-radius: 6px;
+}
+.title_results{
+    padding: 13px;
+    font-weight: bold;
+    background: #9ABE05;
+    border-radius: 12px;
+    text-align: center;
+
+}
+.results_points{
+    padding: 12px 29px;
 }

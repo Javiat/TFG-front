@@ -48,7 +48,7 @@ export class GameComponent implements OnInit{
     public seconds: number;
     public puntos:number;
     public isPaused: boolean;
-   
+    public nivel:string;
     constructor(
         private _router:Router,
         private _route:ActivatedRoute,
@@ -61,37 +61,30 @@ export class GameComponent implements OnInit{
         this.title='Listado de tareas';
         this.task=new Task('','','','',null,null,null,'',null,'','');
         this.identity=this._userService.getIdentity();
-        this.partida=new Partida('',null,null,0,this.identity._id,null,null,null,0);
+        this.partida=new Partida('',null,null,'',this.identity._id,null,null,null,0);
         this.user=this.identity;
         this.url=GLOBAL.url;
         this.id=this._userService.identity._id;
         this.calendarOptions=Calendar;
+        this.nivel=JSON.parse(localStorage.getItem('nivel'));;
     }
    
     ngOnInit(){
       $.getScript('../assets/js/script.js');
-        
+      this.getTasks();
        setTimeout(() => {
           
         }, 2000);
-       
-        this.getTasks();
+        
          var f_inicio=new Date();
          this.partida.inicio=f_inicio;
          this.minutes =JSON.parse(localStorage.getItem("minutes"));
          this.seconds = JSON.parse(localStorage.getItem("seconds"));
          console.log(localStorage);
         setInterval(() => this.tick(), 1000);
-        
-        
+       
       }
     
-      
-    
-   resetTimer(): void {
-    
-   
-   }
 
    private tick(): void {
     localStorage.setItem('minutes',JSON.stringify(this.minutes));
@@ -129,7 +122,8 @@ export class GameComponent implements OnInit{
                       type:this.tasks[i].type,
                       description:this.tasks[i].description,
                       color:this.tasks[i].color,
-                      localizacion:this.tasks[i]      
+                      localizacion:this.tasks[i],
+                      colocado:this.tasks[i].colocado   
                     }
                     var type=this.events[i].type;
                    if(type=='solida trabajo' ||type=='solida personal' || type=='solida importante trabajo' || type=='solida importante personal' || type=='solida urgente trabajo'
@@ -156,10 +150,6 @@ export class GameComponent implements OnInit{
     }
 
     getTask(id){
-      // $("#formulario").show();
-      // $("#tareas").hide();
-      // this._route.params.forEach((params:Params)=>{
-      //     let id=params['id'];
           this._taskService.getTask(id).subscribe(
               response=>{
                   if(!response.task){
@@ -177,7 +167,6 @@ export class GameComponent implements OnInit{
                   }
               }
           )
-      // });
     }
     updateEvent(model: any) {
         
@@ -188,7 +177,7 @@ export class GameComponent implements OnInit{
           end: model.event.end,
           title: model.event.title,
           type:model.event.type,
-          constraint:false
+          colocad:model.event.colocado
           // other params
         },
         duration: {
@@ -237,7 +226,7 @@ export class GameComponent implements OnInit{
 
   );
    }
-    evaluar(){
+  evaluar(){
         for(var i=0;i<this.tasks.length-1;i++){
           if(this.tasks[i].end!=null && this.tasks[i+1].start!=null){
             this.tasks.sort(function(a,b){
@@ -247,8 +236,8 @@ export class GameComponent implements OnInit{
             console.log('No se puede comparar');
           }
         }
-        $("#resultados").show();
-        $("#tareas").hide();
+        
+       
         this.compararFechas();
         this.partida.puntos=this.puntos;
         this.partida.nivel=JSON.parse(localStorage.getItem('nivel'));
@@ -260,16 +249,19 @@ export class GameComponent implements OnInit{
         localStorage.removeItem('seconds');
         this.togglePause();
         Calendar.events=[];
+        $("#resultados").show();
+        $("#tareas").hide();
     }
     savePartida(){
       var f=new Date();
       this.partida.fin=f;
       var fecha_inicio = moment(this.partida.inicio);
       var fecha_fin = moment(this.partida.fin);
-      var totalHours = fecha_fin.diff(fecha_inicio, 'hours');
       var totalMinutes = fecha_fin.diff(fecha_inicio, 'minutes');
+      var totalSeconds = fecha_fin.diff(fecha_inicio, 'seconds');
       var clearMinutes = totalMinutes % 60;
-      this.partida.duracion=totalMinutes;
+      var clearSeconds=totalSeconds%60;
+      this.partida.duracion=clearMinutes+':'+clearSeconds;
       this.partida.bien_planificadas=this.bien_planificadas;
       this.partida.mal_planificadas=this.mal_planificadas;
       this._partidaService.register(this.partida).subscribe(
@@ -278,7 +270,6 @@ export class GameComponent implements OnInit{
                 console.log(response);
             }else{
                 console.log(response);
-                
             }
         },
         error=>{
@@ -297,8 +288,7 @@ export class GameComponent implements OnInit{
           var totalMinutes = fecha_fin.diff(fecha_inicio, 'minutes');
           var clearMinutes = totalMinutes % 60;
           console.log('Diferencia entre:'+this.tasks[i].title+" y "+this.tasks[i+1].title+" es: "+totalHours + " hours and " + clearMinutes + " minutes");
-          var myTextArea = document.getElementById('#resultados');
-          $('#resultados').val('Diferencia entre:'+this.tasks[i].title+" y "+this.tasks[i+1].title+" es: "+totalHours + " hours and " + clearMinutes + " minutes");
+         
           if(totalMinutes<=29){
             console.log('tarea mal planificada');
             this.mal_planificadas.push(this.tasks[i]);
@@ -471,11 +461,7 @@ export class GameComponent implements OnInit{
       
          
       }
-
-     
       eventClick(model: any) {
-       
-       
         model = {
           event: {
             id: model.event.id,
