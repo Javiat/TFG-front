@@ -54,9 +54,6 @@ export class TaskGameEditComponent implements OnInit {
 
         console.log('task-edit.component cargado');
         this.getTask();
-         setTimeout(() => {
-            
-          }, 1000);
         this.getTasks();
         this.minutes =JSON.parse(localStorage.getItem("minutes"));
         this.seconds = JSON.parse(localStorage.getItem("seconds"));

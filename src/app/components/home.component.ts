@@ -62,7 +62,10 @@ export class HomeComponent implements OnInit{
                     }else{
                         if(response.tasks){
                             console.log(response);
-                            this._router.navigate(['/game'])
+                            setTimeout(() => {
+                                this._router.navigate(['/game'])
+                            }, 1000);
+                            
                         }else{
                             console.log('Error');
                         }
@@ -91,7 +94,9 @@ export class HomeComponent implements OnInit{
                     }else{ 
                         if(response.tasks){
                             console.log(response);
-                            this._router.navigate(['/game'])
+                            setTimeout(() => {
+                                this._router.navigate(['/game'])
+                            }, 1000);
                         }else{
                             console.log('Error');
                         }

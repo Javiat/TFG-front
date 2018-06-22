@@ -72,10 +72,7 @@ export class GameComponent implements OnInit{
     ngOnInit(){
       $.getScript('../assets/js/script.js');
       this.getTasks();
-       setTimeout(() => {
-          
-        }, 2000);
-        
+       
          var f_inicio=new Date();
          this.partida.inicio=f_inicio;
          this.minutes =JSON.parse(localStorage.getItem("minutes"));
